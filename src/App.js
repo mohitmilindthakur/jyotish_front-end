@@ -1,36 +1,58 @@
 import React from 'react';
 import './App.css';
 import KundaliContainer from './components/kundali-container/kundali-container.component';
+import BirthDetailsForm from './components/BirthDetailsForm/BirthDetailsForm.component';
 
-function App() {
-  return (
-    <div className="App">
+class App extends React.Component {
 
-      <div className="toolbar">
-      
-      </div>
+  constructor() {
+    super();
+    this.state = {
+      kundali: []
+    }
+  }
 
-      <div className = "content">
-        <KundaliContainer />
-        {/* <KundaliInfo /> */}
-      </div>
+  componentDidMount () {
+    fetch('http://localhost:5000/')
+    .then(data => data.json())
+    .then(data => {
+      console.log(data);
+      this.setState({kundali: data})
+    });
+  }
 
-      {/* <div className="container">
-        <Kundali height = "350" width = "400" />
+  render() {
+    return (
+      <div className="App">
+
+        <div className="toolbar">
+        
+        </div>
+
+        <div className = "content">
+          <KundaliContainer bhavas = {this.state.kundali.bhavas} />
+          {/* <KundaliInfo /> */}
+          <div style = {{margin: '10px'}}></div>
+          <BirthDetailsForm />
+        </div>
+
+        {/* <div className="container">
+          <Kundali height = "350" width = "400" />
+          <div style = {{margin: '10px'}}></div>
+          <Kundali height = "350" width = "400" />
+        </div>
+        
         <div style = {{margin: '10px'}}></div>
-        <Kundali height = "350" width = "400" />
+
+        <div className="container">
+          <Kundali height = "350" width = "400" />
+          <div style = {{margin: '10px'}}></div>
+          <Kundali height = "350" width = "400" />
+        </div> */}
+
       </div>
-      
-      <div style = {{margin: '10px'}}></div>
-
-      <div className="container">
-        <Kundali height = "350" width = "400" />
-        <div style = {{margin: '10px'}}></div>
-        <Kundali height = "350" width = "400" />
-      </div> */}
-
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
