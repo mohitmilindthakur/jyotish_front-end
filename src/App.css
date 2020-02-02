@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  justify-content: space-between;
 }
 
 .toolbar {
@@ -10,7 +11,7 @@
   background-color: #0fabbc;
   box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2);
   height: 75px;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 
 .content {

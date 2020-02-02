@@ -1,17 +1,18 @@
 import React from 'react';
 import './BirthDetailsForm.styles.scss';
+import axios from 'axios';
 
 class BirthDetailsForm extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       name: '',
       gender: 'female',
       place: '',
       date: '',
-      isFormValid: false
+      time: ''
     }
   }
 
@@ -19,8 +20,34 @@ class BirthDetailsForm extends React.Component {
     
   }
 
+  formatDateAndTime = () => {
+    let date = this.state.date;
+    let date_split = date.split('-');
+
+    let year = Number(date_split[0]);
+    let month = Number(date_split[1]);
+    let day = Number(date_split[2]);
+
+    let time = this.state.time;
+    let time_split = time.split(':');
+
+    let hour = Number(time_split[0]);
+    let min = Number(time_split[1]);
+    let sec = Number(time_split[2]);
+
+    return {year, month, day, hour, min, sec};
+  }
+
   onFormSubmit = (event) => {
     event.preventDefault();
+    let birthDetails = this.formatDateAndTime();
+    birthDetails.timezone = 5.5;
+    birthDetails.longitude = 15;
+    birthDetails.lattitude = 15;
+
+    axios.post('http://localhost:5000', birthDetails)
+    .then(data => this.props.onKundaliChange(data.data));
+
   };
 
   handleChange = (event) => {
