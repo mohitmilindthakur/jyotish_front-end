@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Kundali from './components/Kundali/Kundali.component';
+import KundaliContainer from './components/kundali-container/kundali-container.component';
 
 function App() {
   return (
@@ -10,19 +10,24 @@ function App() {
       
       </div>
 
-      <div className="container">
-        <Kundali height = "400" width = "400" />
+      <div className = "content">
+        <KundaliContainer />
+        {/* <KundaliInfo /> */}
+      </div>
+
+      {/* <div className="container">
+        <Kundali height = "350" width = "400" />
         <div style = {{margin: '10px'}}></div>
-        <Kundali height = "400" width = "400" />
+        <Kundali height = "350" width = "400" />
       </div>
       
       <div style = {{margin: '10px'}}></div>
 
       <div className="container">
-        <Kundali height = "400" width = "400" />
+        <Kundali height = "350" width = "400" />
         <div style = {{margin: '10px'}}></div>
-        <Kundali height = "400" width = "400" />
-      </div>
+        <Kundali height = "350" width = "400" />
+      </div> */}
 
     </div>
   );

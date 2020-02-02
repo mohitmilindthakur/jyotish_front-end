@@ -1,18 +1,18 @@
 .App {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
   height: 100vh;
 }
 
 .toolbar {
   width: 100%;
-  background-color: blueviolet;
-  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.1);
+  /* background-color: #916dd5; */
+  background-color: #0fabbc;
+  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2);
   height: 75px;
   margin-bottom: 25px;
 }
 
-.container {
+.content {
   display: flex;
 }
