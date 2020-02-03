@@ -42,8 +42,8 @@ class BirthDetailsForm extends React.Component {
     event.preventDefault();
     let birthDetails = this.formatDateAndTime();
     birthDetails.timezone = 5.5;
-    birthDetails.longitude = 15;
-    birthDetails.lattitude = 15;
+    birthDetails.longitude = 78.48;
+    birthDetails.lattitude = 17.38;
 
     axios.post('http://localhost:5000', birthDetails)
     .then(data => this.props.onKundaliChange(data.data));

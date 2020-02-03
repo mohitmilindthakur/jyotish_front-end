@@ -2,7 +2,9 @@ import React from 'react';
 import './App.css';
 import KundaliContainer from './components/kundali-container/kundali-container.component';
 import BirthDetailsForm from './components/BirthDetailsForm/BirthDetailsForm.component';
+import KundaliInfo from './components/KundaliInfo/KundaliInfo.component';
 import Footer from './components/Footer/Footer.component';
+import axios from'axios';
 
 class App extends React.Component {
 
@@ -13,13 +15,25 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount () {
-    fetch('http://localhost:5000/')
-    .then(data => data.json())
-    .then(data => {
-      console.log(data);
-      this.setState({kundali: data})
-    });
+  getCurrentTime = () =>{
+    let date = new Date();
+    let hour = date.getHours();
+    let min = date.getMinutes();
+    let sec = date.getSeconds();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let lattitude = 17.3850;
+    let longitude = 78.4867;
+    let timezone = 5.5;
+
+    return {hour, min, sec, day, month, year, lattitude, longitude, timezone};
+  }
+
+  componentDidMount = () => {
+
+    axios.post('http://localhost:5000/', this.getCurrentTime())
+    .then(data => this.onKundaliChange(data.data));
   }
 
   onKundaliChange = (newKundali) => {
@@ -36,24 +50,10 @@ class App extends React.Component {
 
         <div className = "content">
           <KundaliContainer bhavas = {this.state.kundali.bhavas} />
-          {/* <KundaliInfo /> */}
+          <KundaliInfo grahas = {this.state.kundali.grahas} />
           <div style = {{margin: '10px'}}></div>
           <BirthDetailsForm onKundaliChange = {this.onKundaliChange} />
         </div>
-
-        {/* <div className="container">
-          <Kundali height = "350" width = "400" />
-          <div style = {{margin: '10px'}}></div>
-          <Kundali height = "350" width = "400" />
-        </div>
-        
-        <div style = {{margin: '10px'}}></div>
-
-        <div className="container">
-          <Kundali height = "350" width = "400" />
-          <div style = {{margin: '10px'}}></div>
-          <Kundali height = "350" width = "400" />
-        </div> */}
       <Footer />
       </div>
     );
