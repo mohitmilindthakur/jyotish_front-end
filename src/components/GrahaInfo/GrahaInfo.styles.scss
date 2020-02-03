@@ -1,0 +1,29 @@
+.graha-info {
+    grid-column: 1 / span 2;
+    height: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;;
+
+    thead {
+        text-align: left;
+    }
+
+    tr {
+        text-align: center;
+        // background-color: #6f5a7e;
+        margin: 5px;
+        // border-bottom: 5px solid #555;
+
+        &:hover {
+            background-color: #eee;;
+        }
+
+        &:not(:last-child) td {
+            border-bottom: 1px solid #555;
+        }
+    }
+
+    td {
+
+    }
+}

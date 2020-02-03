@@ -4,20 +4,25 @@ import Kundali from './../kundali/kundali.component'
 
 
 const KundaliContainer = (props) => (
-    <div>
-        <div className="container">
-            <Kundali bhavas = {props.bhavas} height = "400" width = "400" />
-            <div style = {{margin: '10px'}}></div>
-            <Kundali bhavas = {props.bhavas} height = "400" width = "400" />
-        </div>
-        
-        <div style = {{margin: '10px'}}></div>
+    <div className = "kundali-container">
+      {
+          props && props.charts && Object.keys(props.charts).map(chart => (
+              <Kundali bhavas = {props.charts[chart].bhavas} name = {chart} width = "400" height = "400"/> 
+          ))
+      }
 
-        <div className="container">
-            <Kundali bhavas = {props.bhavas} height = "400" width = "400" />
-            <div style = {{margin: '10px'}}></div>
-            <Kundali bhavas = {props.bhavas} height = "400" width = "400" />
-      </div>
+      {
+          props && props.charts && <Kundali bhavas = {props.charts.d1.bhavas} width = "400" height = "400"/>
+      }
+
+      {
+          props && props.charts && <Kundali bhavas = {props.charts.d1.bhavas} width = "400" height = "400"/>
+      }
+
+      {
+          props && props.charts && <Kundali bhavas = {props.charts.d1.bhavas} width = "400" height = "400"/>
+      }
+      
     </div>
 )
 

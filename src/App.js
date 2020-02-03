@@ -5,6 +5,7 @@ import BirthDetailsForm from './components/BirthDetailsForm/BirthDetailsForm.com
 import KundaliInfo from './components/KundaliInfo/KundaliInfo.component';
 import Footer from './components/Footer/Footer.component';
 import axios from'axios';
+import Toolbar from './components/Toolbar/Toolbar.component';
 
 class App extends React.Component {
 
@@ -32,7 +33,7 @@ class App extends React.Component {
 
   componentDidMount = () => {
 
-    axios.post('http://localhost:5000/', this.getCurrentTime())
+    axios.post('http://localhost:5000/charts', this.getCurrentTime())
     .then(data => this.onKundaliChange(data.data));
   }
 
@@ -44,15 +45,12 @@ class App extends React.Component {
     return (
       <div className="App">
 
-        <div className="toolbar">
-        
-        </div>
+        <Toolbar onKundaliChange = {this.onKundaliChange} />
 
         <div className = "content">
-          <KundaliContainer bhavas = {this.state.kundali.bhavas} />
-          <KundaliInfo grahas = {this.state.kundali.grahas} />
+          <KundaliContainer charts = {this.state.kundali.charts} />
+          <KundaliInfo charts = {this.state.kundali.charts} />
           <div style = {{margin: '10px'}}></div>
-          <BirthDetailsForm onKundaliChange = {this.onKundaliChange} />
         </div>
       <Footer />
       </div>
