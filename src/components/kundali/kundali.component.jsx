@@ -35,7 +35,7 @@ const Kundali = (props) => (
 
                         <tspan className = "planet" x={planet_svg_positions[index][0]}>{grahas.slice(0, 3).join(" ")}</tspan>
 
-                        <tspan dy = "5%" className = "planet" x={planet_svg_positions[index][0]} textAnchor = "middle">{grahas.slice(2, grahas.length).join(" ")}</tspan>
+                        <tspan dy = "5%" className = "planet" x={planet_svg_positions[index][0]} textAnchor = "middle">{grahas.slice(3, grahas.length).join(" ")}</tspan>
 
                     </text>       
                 )

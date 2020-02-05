@@ -106,7 +106,7 @@ class BirthDetailsForm extends React.Component {
 
         <input type="date" name="date" onChange = {this.handleChange} required />
 
-        <TextField type="time" name="time" step = "1" onChange = {this.handleChange} required />
+        <input type="time" name="time" step = "1" onChange = {this.handleChange} required />
         <label>Time in 12 Hour Format</label>
 
         <button type="submit">Get Kundali</button>

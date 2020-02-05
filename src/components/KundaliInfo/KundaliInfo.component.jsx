@@ -8,7 +8,7 @@ const KundaliInfo = (props) => (
     <Grid item container >
         <Grid item lg = {10} sm = {12} xl = {7} >
             {
-                props.charts && <GrahaInfo grahas = {props.charts.d1.grahas} />
+                <GrahaInfo/>
             }
         </Grid>
     </Grid>

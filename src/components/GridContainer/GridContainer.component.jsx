@@ -5,9 +5,9 @@ const GridContainer = ({ rows, cols, children, gridGap }) => (
   <div
     className="grid-container"
     style={{
-      "grid-template-rows": `repeat(${rows}, 1fr)`,
-      "grid-template-columns": `repeat(${cols}, 1fr)`,
-      "grid-gap": gridGap
+      "gridTemplateRows": `repeat(${rows}, 1fr)`,
+      "gridTemplateColumns": `repeat(${cols}, 1fr)`,
+      "gridGap": gridGap
     }}
   >
     {children}

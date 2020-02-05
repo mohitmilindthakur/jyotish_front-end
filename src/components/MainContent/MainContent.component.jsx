@@ -9,11 +9,11 @@ const MainContent = (props) => {
   return (
     <div className="main-content">
       <Grid container className = "main-content__grid" >
-        <Grid item lg = {6} xl = {6} sm = {12} xs = {12} md = {6} >
-          <KundaliContainer charts = {props.charts} ></KundaliContainer>
+        <Grid item lg = {6} xl = {5} sm = {12} xs = {12} md = {6} >
+          <KundaliContainer></KundaliContainer>
         </Grid>
         <Grid container item lg = {6} xl = {6} sm = {12} xs = {12} md = {6} >
-          <KundaliInfo charts = {props.charts} ></KundaliInfo>
+          <KundaliInfo></KundaliInfo>
         </Grid>
       </Grid>
     </div>

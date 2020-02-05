@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.styles.scss';
 import KundaliContainer from './components/kundali-container/kundali-container.component';
 import BirthDetailsForm from './components/BirthDetailsForm/BirthDetailsForm.component';
 import KundaliInfo from './components/KundaliInfo/KundaliInfo.component';
@@ -7,6 +7,7 @@ import Footer from './components/Footer/Footer.component';
 import axios from'axios';
 import Toolbar from './components/Toolbar/Toolbar.component';
 import MainContent from './components/MainContent/MainContent.component';
+import {CurrentChartDetailsProvider} from './CurrentChart.context.js';
 
 class App extends React.Component {
 
@@ -45,19 +46,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-
-        <Toolbar onKundaliChange = {this.onKundaliChange} />
-
-        {/* <div className = "content">
-          <KundaliContainer charts = {this.state.kundali.charts} />
-          <KundaliInfo charts = {this.state.kundali.charts} />
-          <div style = {{margin: '10px'}}></div>
-        </div> */}
-
-        <MainContent charts = {this.state.kundali.charts} />
-
-
-      <Footer />
+        <CurrentChartDetailsProvider value = {this.state.kundali} >
+          <Toolbar onKundaliChange = {this.onKundaliChange} />
+          <MainContent />
+          <Footer />
+        </CurrentChartDetailsProvider>
       </div>
     );
   }

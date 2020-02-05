@@ -1,40 +1,46 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './kundali-container.styles.scss';
 import Kundali from './../kundali/kundali.component'
 import GridContainer from "./../GridContainer/GridContainer.component";
+import CurrentChartContext from './../../CurrentChart.context.js';
 
-const KundaliContainer = (props) => (
-    <div className = "kundali-container">
 
-        <GridContainer rows = {3} cols = {2} gridGap = {'10px'} >
-      {
-          props && props.charts && Object.keys(props.charts).map(chart => (
-              <Kundali bhavas = {props.charts[chart].bhavas} name = {chart}/> 
-          ))
-      }
+const KundaliContainer = (props) => {
 
-      {
-          props && props.charts && <Kundali bhavas = {props.charts.d1.bhavas}/>
-      }
+    const charts = useContext(CurrentChartContext);
 
-      {
-          props && props.charts && <Kundali bhavas = {props.charts.d1.bhavas}/>
-      }
+    return (
+        <div className = "kundali-container">
 
-      {
-          props && props.charts && <Kundali bhavas = {props.charts.d1.bhavas}/>
-      }
+            <GridContainer rows = {3} cols = {2} gridGap = {'10px'} >
+        {
+            props && charts.charts && Object.keys(charts.charts).length && Object.keys(charts.charts).map(chart => (
+                <Kundali key = {chart} bhavas = {charts.charts[chart].bhavas} name = {chart}/> 
+            ))
+        }
 
-      {
-          props && props.charts && <Kundali bhavas = {props.charts.d1.bhavas}/>
-      }
+        {
+            props && charts.charts && Object.keys(charts.charts).length && <Kundali bhavas = {charts.charts.d1.bhavas}/>
+        }
 
-      {
-          props && props.charts && <Kundali bhavas = {props.charts.d1.bhavas}/>
-      }
-      </GridContainer>
-      
-    </div>
-)
+        {
+            props && charts.charts && Object.keys(charts.charts).length && <Kundali bhavas = {charts.charts.d1.bhavas}/>
+        }
+
+        {
+            props && charts.charts && Object.keys(charts.charts).length && <Kundali bhavas = {charts.charts.d1.bhavas}/>
+        }
+
+        {
+            props && charts.charts && Object.keys(charts.charts).length && <Kundali bhavas = {charts.charts.d1.bhavas}/>
+        }
+
+        {
+            props && charts.charts && Object.keys(charts.charts).length && <Kundali bhavas = {charts.charts.d1.bhavas}/>
+        }
+        </GridContainer>
+        </div>
+    )
+}
 
 export default KundaliContainer;
