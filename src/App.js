@@ -6,6 +6,7 @@ import KundaliInfo from './components/KundaliInfo/KundaliInfo.component';
 import Footer from './components/Footer/Footer.component';
 import axios from'axios';
 import Toolbar from './components/Toolbar/Toolbar.component';
+import MainContent from './components/MainContent/MainContent.component';
 
 class App extends React.Component {
 
@@ -33,7 +34,7 @@ class App extends React.Component {
 
   componentDidMount = () => {
 
-    axios.post('http://localhost:5000/charts', this.getCurrentTime())
+    axios.post('http://192.168.1.8:5000/charts', this.getCurrentTime())
     .then(data => this.onKundaliChange(data.data));
   }
 
@@ -47,11 +48,15 @@ class App extends React.Component {
 
         <Toolbar onKundaliChange = {this.onKundaliChange} />
 
-        <div className = "content">
+        {/* <div className = "content">
           <KundaliContainer charts = {this.state.kundali.charts} />
           <KundaliInfo charts = {this.state.kundali.charts} />
           <div style = {{margin: '10px'}}></div>
-        </div>
+        </div> */}
+
+        <MainContent charts = {this.state.kundali.charts} />
+
+
       <Footer />
       </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import './BirthDetailsForm.styles.scss';
 import axios from 'axios';
-import { FormGroup } from '@material-ui/core';
+import { FormGroup, Grid } from '@material-ui/core';
 import {TextField, Radio, RadioGroup, FormControlLabel, Button} from '@material-ui/core';
 
 
@@ -15,7 +15,10 @@ class BirthDetailsForm extends React.Component {
       gender: 'female',
       place: '',
       date: '',
-      time: ''
+      time: '',
+      lattitude: '',
+      longitude: '',
+      timezone: ''
     }
   }
 
@@ -66,7 +69,7 @@ class BirthDetailsForm extends React.Component {
     return (
       <form action="#" onSubmit = {this.onFormSubmit} className = "kundali-form">
         {/* <input name = "name" onChange = {this.handleChange} value = {this.state.name} required clasName = "kundali-form__input" /> */}
-        <TextField label="Name" variant="outlined" name = "name" onChange = {this.handleChange} value = {this.state.name} required autoFocus/>
+        <TextField label="Name" variant="outlined" name = "name" onChange = {this.handleChange} value = {this.state.name} required autoFocus className = "kundali-form__name" size = "medium" />
 
         {/* <div>
           <input type="radio" name="gender" value = "male" onChange = {this.handleChange} checked = {this.state.gender === "male"} required/>
@@ -92,6 +95,15 @@ class BirthDetailsForm extends React.Component {
 
         <TextField name="place" label="Place" variant="outlined" onChange = {this.handleChange} value = {this.state.place} required />
 
+        <div className="kundali-form__coordinates">
+          <TextField name="lattitude" label="lattitude" variant="outlined" onChange = {this.handleChange} value = {this.state.lattitude} required />
+
+          <TextField name="longitude" label="longitude" variant="outlined" onChange = {this.handleChange} value = {this.state.longitude} required />
+
+          <TextField name="timezone" label="timezone" variant="outlined" onChange = {this.handleChange} value = {this.state.timezone} required />
+
+        </div>
+
         <input type="date" name="date" onChange = {this.handleChange} required />
 
         <TextField type="time" name="time" step = "1" onChange = {this.handleChange} required />
@@ -99,6 +111,7 @@ class BirthDetailsForm extends React.Component {
 
         <button type="submit">Get Kundali</button>
       </form>
+
     );
   }
 }

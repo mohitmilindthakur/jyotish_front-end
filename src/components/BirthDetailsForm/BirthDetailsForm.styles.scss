@@ -10,7 +10,18 @@
     height: 50vh;
     justify-content: space-around;
     border-radius: 50px;
-    
+
+    &__name {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    &__coordinates {
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+    }
+
     button {
         align-self: center;
     }

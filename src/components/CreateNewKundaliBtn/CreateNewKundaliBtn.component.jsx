@@ -1,6 +1,6 @@
 import React from 'react';
 import './CreateNewKundaliBtn.styles.scss';
-import { Modal } from '@material-ui/core';
+import { Modal, Grid } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import BirthDetailsForm from './../BirthDetailsForm/BirthDetailsForm.component';
 
@@ -19,9 +19,9 @@ const CreateNewKundaliBtn = (props) => {
   return (
     <div>
       <button onClick = {handleOpen} >New Kundali</button>
-      <Modal open = {open} onClose = {handleClose} BackdropComponent={Backdrop}>
-        <BirthDetailsForm close = {handleClose} onKundaliChange = {props.onKundaliChange} />
-      </Modal>
+        <Modal open = {open} onClose = {handleClose} BackdropComponent={Backdrop}>
+            <BirthDetailsForm close = {handleClose} onKundaliChange = {props.onKundaliChange} />
+        </Modal>
     </div>
   )
 }

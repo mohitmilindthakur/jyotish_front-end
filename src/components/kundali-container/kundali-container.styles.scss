@@ -1,10 +1,5 @@
 .kundali-container {
-    display: flex;
     flex-basis: 45%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-
-    * {
-      margin-left: 5px;
-    }
+    height: 100%;
+    padding: 10px;
   }

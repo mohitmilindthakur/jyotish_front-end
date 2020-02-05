@@ -4,10 +4,10 @@ import {planet_svg_positions, sign_svg_positions} from './kundali-svg.config';
 
 const Kundali = (props) => (
   <div className="kundali"
-    style = {{
-        height: props.height+'px',
-        width: props.width+'px'
-    }}
+    // style = {{
+    //     height: props.height+'px',
+    //     width: props.width+'px'
+    // }}
   >
     <svg
       width="100%"
