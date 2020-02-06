@@ -3,6 +3,7 @@ import './BirthDetailsForm.styles.scss';
 import axios from 'axios';
 import { FormGroup, Grid } from '@material-ui/core';
 import {TextField, Radio, RadioGroup, FormControlLabel, Button} from '@material-ui/core';
+import BirthDetailsContext from './../../BirthDetails.context.js';
 
 
 class BirthDetailsForm extends React.Component {
@@ -21,6 +22,8 @@ class BirthDetailsForm extends React.Component {
       timezone: ''
     }
   }
+
+  static contextType = BirthDetailsContext;
 
   getLocationsDetails = () => {
     
@@ -50,13 +53,7 @@ class BirthDetailsForm extends React.Component {
     birthDetails.timezone = 5.5;
     birthDetails.longitude = 78.48;
     birthDetails.lattitude = 17.38;
-
-    axios.post('http://localhost:5000/charts', birthDetails)
-    .then(data => {
-      this.props.close()
-      this.props.onKundaliChange(data.data)
-      });
-
+    this.context.updateBirthDetails(birthDetails);
   };
 
   handleChange = (event) => {

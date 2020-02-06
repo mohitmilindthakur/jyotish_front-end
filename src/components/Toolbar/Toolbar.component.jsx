@@ -8,7 +8,7 @@ const Toolbar = (props) => {
 
   return (
     <div className="toolbar">
-      <CreateNewKundaliBtn onKundaliChange = {props.onKundaliChange} />
+      <CreateNewKundaliBtn  />
     </div>
   )
 }

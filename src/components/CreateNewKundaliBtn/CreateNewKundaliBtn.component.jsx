@@ -20,7 +20,7 @@ const CreateNewKundaliBtn = (props) => {
     <div>
       <button onClick = {handleOpen} >New Kundali</button>
         <Modal open = {open} onClose = {handleClose} BackdropComponent={Backdrop}>
-            <BirthDetailsForm close = {handleClose} onKundaliChange = {props.onKundaliChange} />
+            <BirthDetailsForm close = {handleClose} />
         </Modal>
     </div>
   )
