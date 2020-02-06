@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import './GrahaInfo.styles.scss';
-import ChartDetails from './../../CurrentChart.context.js';
+import ChartDetails from './../../ChartDetails.context.js';
 
 const GrahaInfo = (props) => {
 

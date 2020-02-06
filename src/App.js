@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.styles.scss';
 import KundaliContainer from './components/kundali-container/kundali-container.component';
-import BirthDetailsForm from './components/BirthDetailsForm/BirthDetailsForm.component';
 import KundaliInfo from './components/KundaliInfo/KundaliInfo.component';
 import Footer from './components/Footer/Footer.component';
 import axios from'axios';
 import Toolbar from './components/Toolbar/Toolbar.component';
 import MainContent from './components/MainContent/MainContent.component';
-import {ChartDetailsProvider} from './CurrentChart.context.js';
+import {ChartDetailsProvider} from './ChartDetails.context.js';
 
 class App extends React.Component {
 
