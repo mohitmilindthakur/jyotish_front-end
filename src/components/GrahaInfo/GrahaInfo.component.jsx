@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import './GrahaInfo.styles.scss';
-import CurrentChart from './../../CurrentChart.context.js';
+import ChartDetails from './../../CurrentChart.context.js';
 
 const GrahaInfo = (props) => {
 
-    const charts = useContext(CurrentChart);
+    const charts = useContext(ChartDetails);
     const grahas = charts.charts && charts.charts.d1.grahas;
     
     return (
@@ -23,7 +23,7 @@ const GrahaInfo = (props) => {
 
                 <tbody>
                     {
-                        grahas && Object.keys(grahas).map(graha => (
+                        Object.keys(grahas).map(graha => (
                             <tr key = {graha} >
                                 <td>{graha}</td>
                                 <td>{grahas[graha].longitude.toFixed(2)}</td>

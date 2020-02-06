@@ -7,14 +7,15 @@ import Footer from './components/Footer/Footer.component';
 import axios from'axios';
 import Toolbar from './components/Toolbar/Toolbar.component';
 import MainContent from './components/MainContent/MainContent.component';
-import {CurrentChartDetailsProvider} from './CurrentChart.context.js';
+import {ChartDetailsProvider} from './CurrentChart.context.js';
 
 class App extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      kundali: []
+      birthDetails: {},
+      chartDetails: []
     }
   }
 
@@ -35,22 +36,26 @@ class App extends React.Component {
 
   componentDidMount = () => {
 
-    axios.post('http://192.168.1.8:5000/charts', this.getCurrentTime())
-    .then(data => this.onKundaliChange(data.data));
+    let birthDetails = this.getCurrentTime();
+
+    this.setState({birthDetails: birthDetails}, () => {
+      axios.post('http://localhost:5000/charts', this.state.birthDetails)
+      .then(data => this.onKundaliChange(data.data));
+    })
   }
 
   onKundaliChange = (newKundali) => {
-    this.setState({kundali: newKundali})
+    this.setState({chartDetails: newKundali})
   }
 
   render() {
     return (
       <div className="App">
-        <CurrentChartDetailsProvider value = {this.state.kundali} >
+        <ChartDetailsProvider value = {this.state.chartDetails} >
           <Toolbar onKundaliChange = {this.onKundaliChange} />
-          <MainContent />
+          {this.state.chartDetails.charts && <MainContent />}
           <Footer />
-        </CurrentChartDetailsProvider>
+        </ChartDetailsProvider>
       </div>
     );
   }

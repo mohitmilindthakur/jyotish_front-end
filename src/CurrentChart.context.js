@@ -2,10 +2,10 @@ import React from 'react';
 
 
 
-const CurrentChartDetails = React.createContext({});
+const ChartDetails = React.createContext({});
 
-export const CurrentChartDetailsProvider = CurrentChartDetails.Provider;
+export const ChartDetailsProvider = ChartDetails.Provider;
 
-export const CurrentChartDetailsConsumer = CurrentChartDetails.Consumer;
+export const ChartDetailsConsumer = ChartDetails.Consumer;
 
-export default CurrentChartDetails;
+export default ChartDetails;
