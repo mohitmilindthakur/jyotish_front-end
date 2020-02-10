@@ -2,7 +2,7 @@ import React from 'react';
 import './Toolbar.styles.scss';
 import CreateNewKundaliBtn from './../CreateNewKundaliBtn/CreateNewKundaliBtn.component';
 import BirthDetailsControl from './../BirthDetailsControl/BirthDetailsControl.component';
-import ToolbarBirthDetialsInfo from './../ToolbarBirthDetialsInfo/ToolbarBirthDetialsInfo.component';
+import BirthDetailsToolbarInfo from './../BirthDetailsToolbarInfo/BirthDetailsToolbarInfo.component';
 import {Grid} from '@material-ui/core';
 
 
@@ -14,8 +14,8 @@ const Toolbar = (props) => {
       <Grid item>
         <BirthDetailsControl />
       </Grid>
-      <Grid item>
-        <ToolbarBirthDetialsInfo />
+      <Grid item align = "center">
+        <BirthDetailsToolbarInfo />
       </Grid>
       <Grid item>
         <BirthDetailsControl />

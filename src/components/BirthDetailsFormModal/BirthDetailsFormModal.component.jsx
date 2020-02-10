@@ -17,7 +17,7 @@ const BirthDetailsFormModal = props => {
   }  
   return (
     <Fragment>
-    <button onClick = {handleOpen} >{props.children}</button>
+    <button onClick = {handleOpen} style = {{backgroundColor: 'transparent', border: 'none', color: '#ffffff', cursor: 'pointer'}} >{props.children}</button>
       <Modal open = {open} onClose = {handleClose} BackdropComponent={Backdrop}>
           <BirthDetailsForm close = {handleClose} isNewForm = {props.isNewForm} />
       </Modal>
