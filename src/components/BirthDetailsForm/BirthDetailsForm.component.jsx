@@ -4,6 +4,7 @@ import axios from 'axios';
 import { FormGroup, Grid } from '@material-ui/core';
 import {TextField, Radio, RadioGroup, FormControlLabel, Button} from '@material-ui/core';
 import BirthDetailsContext from './../../BirthDetails.context.js';
+import SearchLocation from './../SearchLocation/SearchLocation.component';
 
 
 class BirthDetailsForm extends React.Component {
@@ -13,69 +14,53 @@ class BirthDetailsForm extends React.Component {
 
     this.state = {
       name: '',
-      gender: 'female',
+      gender: '',
       place: '',
-      date: '',
-      time: '',
-      lattitude: '',
-      longitude: '',
-      timezone: ''
+      year: '',
+      month: '',
+      day: '',
+      hour: '',
+      min: '',
+      sec: '',
+      lattitude: '17.38',
+      longitude: '78.48',
+      timezone: '5.5'
     }
   }
 
   static contextType = BirthDetailsContext;
 
-  getLocationsDetails = () => {
-    
-  }
-
-  formatDateAndTime = () => {
-    let date = this.state.date;
-    let date_split = date.split('-');
-
-    let year = Number(date_split[0]);
-    let month = Number(date_split[1]);
-    let day = Number(date_split[2]);
-
-    let time = this.state.time;
-    let time_split = time.split(':');
-
-    let hour = Number(time_split[0]);
-    let min = Number(time_split[1]);
-    let sec = Number(time_split[2]);
-
-    return {year, month, day, hour, min, sec};
-  }
-
   onFormSubmit = (event) => {
     event.preventDefault();
-    let birthDetails = this.formatDateAndTime();
-    birthDetails.timezone = 5.5;
-    birthDetails.longitude = 78.48;
-    birthDetails.lattitude = 17.38;
-    this.context.updateBirthDetails(birthDetails);
+    this.context.updateBirthDetails(this.state);
+    if (this.props.close) this.props.close();
   };
 
   handleChange = (event) => {
     let {name, value} = event.target;
-    console.log(`name --> ${name}, value --> ${value}`);
     this.setState({[name]: value});
   }
 
+  setLocation = (place, coords) => {
+    this.setState({place: place});
+    this.setState({lattitude: coords.lat});
+    this.setState({longitude: coords.lng});
+  }
+
+  componentDidMount() {
+    if (!this.props.isNewForm) {
+      this.setState(this.context.birthDetails);
+    }
+  }
+
   render() {
+    console.log('rendered');
     return (
       <form action="#" onSubmit = {this.onFormSubmit} className = "kundali-form">
-        {/* <input name = "name" onChange = {this.handleChange} value = {this.state.name} required clasName = "kundali-form__input" /> */}
+
         <TextField label="Name" variant="outlined" name = "name" onChange = {this.handleChange} value = {this.state.name} required autoFocus className = "kundali-form__name" size = "medium" />
 
-        {/* <div>
-          <input type="radio" name="gender" value = "male" onChange = {this.handleChange} checked = {this.state.gender === "male"} required/>
-          <label>Male</label>
-          <input type="radio" name="gender" value = "female" onChange = {this.handleChange} checked = {this.state.gender === "female"} required />
-          <label>Female</label>
-        </div> */}
-
-        <RadioGroup aria-label="position" name="position" value=    {this.state.gender} onChange={this.handleChange} row>
+        <RadioGroup aria-label="position" name="gender" value = {this.state.gender} onChange={this.handleChange} row>
           <FormControlLabel
             value="male"
             control={<Radio color="primary" />}
@@ -90,21 +75,42 @@ class BirthDetailsForm extends React.Component {
           />
           </RadioGroup>
 
-        <TextField name="place" label="Place" variant="outlined" onChange = {this.handleChange} value = {this.state.place} required />
+        <SearchLocation place = {this.state.place} setLocation = {this.setLocation} handleChange = {this.handleChange} />
 
-        <div className="kundali-form__coordinates">
-          <TextField name="lattitude" label="lattitude" variant="outlined" onChange = {this.handleChange} value = {this.state.lattitude} required />
 
-          <TextField name="longitude" label="longitude" variant="outlined" onChange = {this.handleChange} value = {this.state.longitude} required />
+        <Grid container direction = "column" className = "kundali-form__coords-time">
 
-          <TextField name="timezone" label="timezone" variant="outlined" onChange = {this.handleChange} value = {this.state.timezone} required />
+          <Grid container item justify = "space-around">
 
-        </div>
+            <TextField name="lattitude" label="lattitude" variant="outlined" onChange = {this.handleChange} value = {this.state.lattitude} required />
 
-        <input type="date" name="date" onChange = {this.handleChange} required />
+            <TextField name="longitude" label="longitude" variant="outlined" onChange = {this.handleChange} value = {this.state.longitude} required />
 
-        <input type="time" name="time" step = "1" onChange = {this.handleChange} required />
-        <label>Time in 12 Hour Format</label>
+            <TextField name="timezone" label="timezone" variant="outlined" onChange = {this.handleChange} value = {this.state.timezone} required />
+
+          </Grid>
+
+          <Grid container item justify = "space-around">
+
+            <TextField name="day" label="day" variant="outlined" onChange = {this.handleChange} value = {this.state.day} required />
+
+            <TextField name="month" label="month" variant="outlined" onChange = {this.handleChange} value = {this.state.month} required />
+
+            <TextField name="year" label="year" variant="outlined" onChange = {this.handleChange} value = {this.state.year} required />
+
+          </Grid>
+
+          <Grid container item justify = "space-around">
+
+            <TextField name="hour" label="hour" variant="outlined" onChange = {this.handleChange} value = {this.state.hour} required />
+
+            <TextField name="min" label="min" variant="outlined" onChange = {this.handleChange} value = {this.state.min} required />
+
+            <TextField name="sec" label="sec" variant="outlined" onChange = {this.handleChange} value = {this.state.sec} required />
+
+          </Grid>
+
+        </Grid>
 
         <button type="submit">Get Kundali</button>
       </form>

@@ -1,0 +1,26 @@
+.search-input {
+    position: relative;
+}
+
+.searched-locations {
+    position: absolute;
+    top: 100%;
+    height: auto;
+    font-size: 1.1rem;
+    background-image: linear-gradient(to bottom right, #5d4387, #3d206d);
+    color: #eeeeee;
+    z-index: 5;
+    width: 100%;
+    padding-left: 5%;
+    border-radius: 20px;
+    cursor: pointer;
+
+    &__item {
+        padding: 5px;
+        width: 100%;
+
+        &:hover {
+            color: #ffffff;
+        }
+    }
+}

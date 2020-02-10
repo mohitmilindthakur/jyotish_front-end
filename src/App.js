@@ -30,8 +30,10 @@ class App extends React.Component {
     let lattitude = 17.3850;
     let longitude = 78.4867;
     let timezone = 5.5;
+    let name = "CURRENT TIME";
+    let gender = "";
 
-    return {hour, min, sec, day, month, year, lattitude, longitude, timezone};
+    return {hour, min, sec, day, month, year, lattitude, longitude, timezone, name, gender};
   }
 
   updateChartDetails = (newChartDetails) => {
