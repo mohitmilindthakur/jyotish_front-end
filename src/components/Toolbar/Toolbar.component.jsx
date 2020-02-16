@@ -1,8 +1,8 @@
 import React from 'react';
 import './Toolbar.styles.scss';
-import CreateNewKundaliBtn from './../CreateNewKundaliBtn/CreateNewKundaliBtn.component';
 import BirthDetailsControl from './../BirthDetailsControl/BirthDetailsControl.component';
 import BirthDetailsToolbarInfo from './../BirthDetailsToolbarInfo/BirthDetailsToolbarInfo.component';
+import UserControl from './../UserControl/UserControl.component';
 import {Grid} from '@material-ui/core';
 
 
@@ -18,7 +18,7 @@ const Toolbar = (props) => {
         <BirthDetailsToolbarInfo />
       </Grid>
       <Grid item>
-        <BirthDetailsControl />
+        <UserControl />
       </Grid>
     </Grid>
   )

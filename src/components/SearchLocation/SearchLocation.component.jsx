@@ -50,7 +50,7 @@ class SearchLocation extends React.Component {
 
         {/* <Grid container justify = "space-around" align = "center"> */}
           <ClickAwayListener onClickAway = {this.closeLocationsList} >
-            <TextField style = {{flexBasis: '70%'}}
+            <TextField
             name="place" label="Place" variant="outlined" onChange = {this.props.handleChange} value = {this.props.place} required className = "search-input" onKeyUp = {this.getLocation} />
           {/* <button onClick = {this.getLocation} >Search</button> */}
           </ClickAwayListener>

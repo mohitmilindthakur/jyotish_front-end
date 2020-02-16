@@ -1,0 +1,58 @@
+import firebase from 'firebase/app';
+import "firebase/auth";
+import "firebase/firestore";
+
+const config = {
+    apiKey: "AIzaSyDbEhK4swuI2FbhnEpbOb3Ug7-jIFtzWzA",
+    authDomain: "ahirbudhnya-2a2e5.firebaseapp.com",
+    databaseURL: "https://ahirbudhnya-2a2e5.firebaseio.com",
+    projectId: "ahirbudhnya-2a2e5",
+    storageBucket: "ahirbudhnya-2a2e5.appspot.com",
+    messagingSenderId: "307045802250",
+    appId: "1:307045802250:web:809fac057d055de8655af3",
+    measurementId: "G-FQLNE5QQDP"
+};
+
+
+// Initialize Firebase
+firebase.initializeApp(config);
+export const auth = firebase.auth();
+
+
+// GOOGLE AUTH
+let provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({prompt: 'select_account'});
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+//FIRESTORE
+const firestore = firebase.firestore();
+
+// SAVING DATA TO FIRESTORE WHENEVER NEW USER LOGS IN
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if (!userAuth) return;
+
+    let userRef = firestore.doc(`/users/${userAuth.uid}`);
+    let snapshot = await userRef.get();
+
+    console.log(userAuth);
+
+    if (!snapshot.exists) {
+        let {displayName, email, uid, photoURL} = userAuth;
+        let createdAt = new Date();
+
+        try {
+            await userRef.set({
+                displayName,
+                email,
+                uid,
+                photoURL,
+                ...additionalData
+            })
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    return userRef;
+}

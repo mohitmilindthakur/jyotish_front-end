@@ -1,0 +1,31 @@
+.custom-menu-container {
+    position: absolute;
+}
+
+.custom-menu {
+    width: 100%;
+    border-radius: 1rem;
+    font-family: sans-serif;
+    background-color: #f7f7f7;
+    padding: 1rem;
+    position: relative;
+    box-shadow: 0 1.1rem 1rem rgba(0,0,0,.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.custom-menu__caret {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ccc;
+    font-size: 3rem;
+    z-index: 5;
+}
+
+.custom-menu:not(:first-child) {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}

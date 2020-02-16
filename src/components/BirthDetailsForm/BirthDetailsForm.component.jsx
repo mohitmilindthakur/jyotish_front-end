@@ -1,8 +1,7 @@
 import React from 'react';
 import './BirthDetailsForm.styles.scss';
-import axios from 'axios';
-import { FormGroup, Grid } from '@material-ui/core';
-import {TextField, Radio, RadioGroup, FormControlLabel, Button} from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import {TextField, Radio, RadioGroup, FormControlLabel} from '@material-ui/core';
 import BirthDetailsContext from './../../BirthDetails.context.js';
 import SearchLocation from './../SearchLocation/SearchLocation.component';
 

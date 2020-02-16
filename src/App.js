@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.styles.scss';
-import KundaliContainer from './components/kundali-container/kundali-container.component';
-import KundaliInfo from './components/KundaliInfo/KundaliInfo.component';
 import Footer from './components/Footer/Footer.component';
 import axios from'axios';
 import Toolbar from './components/Toolbar/Toolbar.component';
 import MainContent from './components/MainContent/MainContent.component';
 import {ChartDetailsProvider} from './ChartDetails.context.js';
 import {BirthDetailsProvider} from './BirthDetails.context.js';
+import {auth, createUserProfileDocument} from './firebase/firebase.utils';
 
 class App extends React.Component {
 
@@ -15,9 +14,12 @@ class App extends React.Component {
     super();
     this.state = {
       birthDetails: {},
-      chartDetails: []
+      chartDetails: [],
+      currentUser: ''
     }
   }
+
+  unsubscribeFromAuth = null;
 
   getCurrentTime = () =>{
     let date = new Date();
@@ -55,6 +57,18 @@ class App extends React.Component {
       axios.post('http://localhost:5000/charts', this.state.birthDetails)
       .then(data => this.updateChartDetails(data.data));
     })
+
+    this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
+      if (userAuth){
+        let userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot(snapshot => {
+          this.setState({currentUser: {
+            id: snapshot.id,
+            ...snapshot.data()
+          }})
+        })
+        }
+      })
   }
 
   render() {
