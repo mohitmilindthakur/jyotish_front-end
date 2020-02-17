@@ -10,9 +10,9 @@ const INITIAL_STATE = {
     hour: date.getHours(),
     min: date.getMinutes(),
     sec: date.getSeconds(),
-    lat: '17',
-    lng: '80',
-    timezone: '5.5',
+    lat: 17,
+    lng: 80,
+    timezone: 5.5,
     place: 'Hyderabad'
 }
 
