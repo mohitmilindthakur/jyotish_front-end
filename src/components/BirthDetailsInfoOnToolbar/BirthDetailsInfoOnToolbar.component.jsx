@@ -1,13 +1,22 @@
 import React from 'react';
 import './BirthDetailsInfoOnToolbar.styles.scss';
 
-const BirthDetailsInfoOnToolbar = (props) => {
+import {connect} from 'react-redux';
+
+import {selectBirthDetails, selectBirthDateString, selectBirthTimeString} from './../../redux/birthDetails/birthDetails.selectors.js'; 
+const BirthDetailsInfoOnToolbar = ({birthDetails: {name, place}, birthDateString, birthTimeString}) => {
 
   return (
     <p className = 'birth-info-toolbar'>
-      CURRENT | 05-05-2000 | 5:15:7 | Baner, Pune
+      {`${name} | ${birthDateString} | ${birthTimeString} | ${place}`}
     </p>
   )
 }
 
-export default BirthDetailsInfoOnToolbar;
+const mapStateToProps = state => ({
+  birthDetails: selectBirthDetails(state),
+  birthDateString: selectBirthDateString(state),
+  birthTimeString: selectBirthTimeString(state)
+})
+
+export default connect(mapStateToProps)(BirthDetailsInfoOnToolbar);

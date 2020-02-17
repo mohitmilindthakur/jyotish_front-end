@@ -9,8 +9,7 @@ import UserControl from './../UserControl/UserControl.component';
 import BirthDetailsInfoOnToolbar from './../BirthDetailsInfoOnToolbar/BirthDetailsInfoOnToolbar.component';
 
 
-class Header extends React.Component {
-  render() {
+const Header = (props) => {
     return (
       <div className = "header">
         <Row type = "flex" justify = "start" align = "middle">
@@ -30,7 +29,6 @@ class Header extends React.Component {
         </Row>
       </div>
     );
-  }
 }
 
 export default Header;
