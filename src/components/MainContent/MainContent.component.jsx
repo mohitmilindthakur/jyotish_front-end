@@ -12,11 +12,11 @@ const MainContent = (props) => {
     <div className="main-content">
       <Row type = "flex">
         
-        <Col span = {12} >
+        <Col xs = {24} md = {12} lg = {10} xxl = {9} >
           <KundaliContainer />
         </Col>
 
-        <Col span = {12} >
+        <Col xs = {24} md = {12} lg = {14} xxl = {15} >
           <KundaliInfo />
         </Col>
       

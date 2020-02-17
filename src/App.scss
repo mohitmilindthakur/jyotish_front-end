@@ -1,3 +1,5 @@
+@import "./assets/sass/variables";
+
 *,
 *::before,
 *:after {
@@ -8,38 +10,38 @@
 
 html {
 
-  @media only screen  and (max-width: 1200px) {
+  @media only screen  and (max-width: $breakpoint-xl) {
     & {
       font-size: 62.5%;
       background-color: #ff11ff;
     }
   }
 
-  @media only screen  and (max-width: 992px) {
+  @media only screen  and (max-width: $breakpoint-lg) {
     & {
       font-size: 62.5%;
     }
   }
 
-  @media only screen  and (max-width: 576px) {
+  @media only screen  and (max-width: $breakpoint-sm) {
     & {
       font-size: 43.75%;
     }
   }
 
-  @media only screen  and (max-width: 768px) {
+  @media only screen  and (max-width: $breakpoint-md) {
     & {
       font-size: 56.25%;
     }
   }
 
-  @media only screen  and (max-width: 480px) {
+  @media only screen  and (max-width: $breakpoint-xs) {
     & {
       font-size: 47%;
     }
   }
 
-  @media only screen  and (min-width: 1600px) {
+  @media only screen  and (min-width: $breakpoint-xxl) {
     & {
       font-size: 68.75%;
     }
@@ -60,7 +62,7 @@ html {
   }
 
   & .main-content {
+    padding-top: 1%;
     flex-basis: 90%;
-    height: 100%;
   }
 }
