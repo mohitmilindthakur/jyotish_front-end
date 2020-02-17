@@ -1,0 +1,57 @@
+*,
+*::before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+
+  @media only screen  and (max-width: 1200px) {
+    & {
+      font-size: 62.5%;
+      background-color: #ff11ff;
+    }
+  }
+
+  @media only screen  and (max-width: 992px) {
+    & {
+      font-size: 62.5%;
+    }
+  }
+
+  @media only screen  and (max-width: 576px) {
+    & {
+      font-size: 43.75%;
+    }
+  }
+
+  @media only screen  and (max-width: 768px) {
+    & {
+      font-size: 56.25%;
+    }
+  }
+
+  @media only screen  and (max-width: 480px) {
+    & {
+      font-size: 47%;
+    }
+  }
+
+  @media only screen  and (min-width: 1600px) {
+    & {
+      font-size: 68.75%;
+    }
+  }
+
+
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}

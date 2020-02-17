@@ -1,0 +1,9 @@
+.header {
+    flex-basis: 5%;
+    background-color: #5d4387;
+    box-shadow: 0 1rem 5rem rgba(0,0,0,.3);
+
+    & > * {
+        height: 100%;
+    }
+}
