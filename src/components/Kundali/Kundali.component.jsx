@@ -17,7 +17,7 @@ const Kundali = (props) => (
       <line className = "line" x1="50%" y1="0" x2="100%" y2="50%" />
       <line className = "line" x1="100%" y1="50%" x2="50%" y2="100%" />
       <line className = "line" x1="50%" y1="100%" x2="0" y2="50%" />
-      {/* {
+      {
         props.bhavas.map(({ rashi, grahas, house }, index) => {
             let all_grahas = grahas.join(" ");
             return (
@@ -45,7 +45,7 @@ const Kundali = (props) => (
                 </text>
             </Fragment>
             );
-      })} */}
+      })}
     </svg>
   </div>
 );
