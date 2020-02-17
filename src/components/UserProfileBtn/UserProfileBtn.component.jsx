@@ -5,7 +5,7 @@ import { Icon } from 'antd';
 const UserProfileBtn = (props) => {
   
   return (
-    <Icon type = "user" className = "kundali-control__btn" />
+    <Icon type = "user" className = "header__control-icon" />
   );
 }
 

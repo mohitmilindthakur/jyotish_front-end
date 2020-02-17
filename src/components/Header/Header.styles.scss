@@ -6,4 +6,10 @@
     & > * {
         height: 100%;
     }
+
+    &__control-icon {
+        font-size: 2.5rem;
+        color: #e1e1e1;
+        cursor: pointer;
+    }
 }

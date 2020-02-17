@@ -6,7 +6,7 @@ import { Icon } from 'antd';
 const UserSettingsBtn = (props) => {
   
   return (
-    <Icon type = "setting" className = "kundali-control__btn" />
+    <Icon type = "setting" className = "header__control-icon" />
   );
 }
 

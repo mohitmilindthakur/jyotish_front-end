@@ -5,7 +5,7 @@ import { Icon } from 'antd';
 const SaveKundaliBtn = (props) => {
   
     return (
-      <Icon type = "save" className = "kundali-control__btn" />
+      <Icon type = "save" className = "header__control-icon" title = "Save Kundali"/>
     );
 }
 

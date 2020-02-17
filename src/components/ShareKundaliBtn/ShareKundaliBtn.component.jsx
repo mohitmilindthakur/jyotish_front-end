@@ -6,7 +6,7 @@ import { Icon } from 'antd';
 const ShareKundaliBtn = (props) => {
 
     return (
-      <Icon type = "share-alt" className = "kundali-control__btn" />
+      <Icon type = "share-alt" className = "header__control-icon" title = "Share Kundali"/>
     );
   }
 

@@ -6,7 +6,7 @@ import { Icon } from 'antd';
 const EditKundaliBtn = (props) => {
 
   return (
-    <Icon type = "edit" className = "kundali-control__btn" />
+    <Icon type = "edit" className = "header__control-icon" title = "Edit Kundali"/>
   )
 };
 
