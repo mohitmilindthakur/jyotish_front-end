@@ -2,10 +2,12 @@ import React from 'react';
 import './NewKundaliBtn.styles.scss';
 import { Icon } from 'antd';
 
+import BirthDetailsFormModal from './../BirthDetailsFormModal/BirthDetailsFormModal.component';
+
 const NewKundaliBtn = (props) => {
 
     return (
-      <Icon className = "header__control-icon" type = "file-add" title = "New Kundali"/>
+      <BirthDetailsFormModal render = {(onClickHandler) => () => (<Icon className = "header__control-icon" onClick = {onClickHandler} type = "file-add" title = "New Kundali"/>)} />
     );
   }
 

@@ -10,22 +10,21 @@
 
 html {
 
-  @media only screen  and (max-width: $breakpoint-xl) {
+  @media only screen  and (max-width: $breakpoint-xxl) {
     & {
       font-size: 62.5%;
-      background-color: #ff11ff;
+    }
+  }
+
+  @media only screen  and (max-width: $breakpoint-xl) {
+    & {
+      font-size: 56.25%;
     }
   }
 
   @media only screen  and (max-width: $breakpoint-lg) {
     & {
-      font-size: 62.5%;
-    }
-  }
-
-  @media only screen  and (max-width: $breakpoint-sm) {
-    & {
-      font-size: 43.75%;
+      font-size: 56.25%;
     }
   }
 
@@ -35,9 +34,15 @@ html {
     }
   }
 
-  @media only screen  and (max-width: $breakpoint-xs) {
+  @media only screen  and (max-width: $breakpoint-sm) {
     & {
       font-size: 47%;
+    }
+  }
+
+  @media only screen  and (max-width: $breakpoint-xs) {
+    & {
+      font-size: 43.75%;
     }
   }
 

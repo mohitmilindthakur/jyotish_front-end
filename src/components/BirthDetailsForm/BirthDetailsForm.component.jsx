@@ -25,6 +25,9 @@ class BirthDetailsForm extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
+    if (this.props.onFormSubmit) {
+      this.props.onFormSubmit();
+    }
   }
 
   render() {
@@ -35,7 +38,7 @@ class BirthDetailsForm extends React.Component {
         <Row type = "flex" justify = "space-between" align = "middle">
           <Col span = {15} >
             <Form.Item className = "birth-details__form-item">
-              <Input prefix = {<Icon type = "user" />} onChange = {this.handleChange} value = {this.state.name} name = "name" placeholder = "Name" />
+              <Input size = "large" prefix = {<Icon type = "user" />} onChange = {this.handleChange} value = {this.state.name} name = "name" placeholder = "Name" />
             </Form.Item>
           </Col>
 
@@ -48,26 +51,26 @@ class BirthDetailsForm extends React.Component {
         </Row>
 
         <Form.Item className = "birth-details__form-item">
-          <Input.Search prefix = {<Icon type = "compass" />} onChange = {this.handleChange} value = {this.state.place} name = "place" placeholder = "Place" />
+          <Input.Search size = "large" prefix = {<Icon type = "compass" />} onChange = {this.handleChange} value = {this.state.place} name = "place" placeholder = "Place" />
         </Form.Item>
 
         <Row type = "flex" justify = "space-between" align = "middle">
 
           <Col span = {7} >
             <Form.Item className = "birth-details__form-item">
-              <Input pattern = "[0-9]+([\.][0-9]+)?" onChange = {this.handleChange} value = {this.state.lat} name = "lat" placeholder = "Latitude" />
+              <Input size = "large" pattern = "[0-9]+([\.][0-9]+)?" onChange = {this.handleChange} value = {this.state.lat} name = "lat" placeholder = "Latitude" />
             </Form.Item>
           </Col>
 
           <Col span = {7} >
             <Form.Item className = "birth-details__form-item">
-              <Input pattern = "[0-9]+([\.][0-9]+)?" onChange = {this.handleChange} value = {this.state.lng} name = "lng" placeholder = "Longitude"/>
+              <Input size = "large" pattern = "[0-9]+([\.][0-9]+)?" onChange = {this.handleChange} value = {this.state.lng} name = "lng" placeholder = "Longitude"/>
             </Form.Item>
           </Col>
 
           <Col span = {7} >
             <Form.Item className = "birth-details__form-item">
-              <Input pattern = "[0-9]+([\.][0-9]+)?" onChange = {this.handleChange} value = {this.state.timezone} name = "timezone" placeholder = "timezone"/>
+              <Input size = "large" pattern = "[0-9]+([\.][0-9]+)?" onChange = {this.handleChange} value = {this.state.timezone} name = "timezone" placeholder = "timezone"/>
             </Form.Item>
           </Col>
 
@@ -77,13 +80,13 @@ class BirthDetailsForm extends React.Component {
 
           <Col span = {8}>
             <Form.Item className = "birth-details__form-item">
-              <Input type = "date" prefix = {<Icon type = "calendar"/>} onChange = {this.handleChange} name = "dateString" value = {this.state.dateString} />
+              <Input size = "large" type = "date" prefix = {<Icon type = "calendar"/>} onChange = {this.handleChange} name = "dateString" value = {this.state.dateString} />
             </Form.Item>
           </Col>
 
           <Col span = {8} pull = {5}>
             <Form.Item className = "birth-details__form-item">
-              <Input type = "time" prefix = {<Icon type = "clock-circle"/>} onChange = {this.handleChange} name = "timeString" value = {this.state.timeString} step = "1"/>
+              <Input size = "large" type = "time" prefix = {<Icon type = "clock-circle"/>} onChange = {this.handleChange} name = "timeString" value = {this.state.timeString} step = "1"/>
             </Form.Item>
           </Col>
 
