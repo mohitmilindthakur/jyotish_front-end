@@ -1,0 +1,33 @@
+.graha-info {
+    overflow: auto;
+    width: 100%;
+    max-height: 50%;
+
+    table{
+        overflow: scroll;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    thead {
+        text-align: left;
+    }
+
+    tr {
+        text-align: center;
+        margin: 5px;
+        height: 45px;
+
+        &:hover {
+            background-color: #eee;;
+        }
+
+        &:not(:last-child) td {
+            border-bottom: 1px solid #5d4387;
+        }
+    }
+
+    td {
+        padding: 15px;
+    }
+}

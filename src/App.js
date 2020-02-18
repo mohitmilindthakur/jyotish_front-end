@@ -19,7 +19,8 @@ const App = ({birthDetails, setKundali}) => {
     axios.post('/charts', birthDetails)
     .then(data => {
       setKundali(data.data);
-    });
+    })
+    .catch((err) => alert('something went wrong! Please Try Again', err));
   })
 
   return (

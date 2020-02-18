@@ -14,7 +14,7 @@ const KundaliContainer = ({charts, divisionalChart, visibleCharts, bhavas}) => {
   let isChartsValid = charts && Object.keys(charts).length > 0;
 
   return (
-    <div style = {{border: '1px solid purple', height: '100%'}} className = "kundali-container">
+    <div className = "kundali-container">
 
       <GridContainer rows = "3" cols = "2" gridGap = "1rem">
 
