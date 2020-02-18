@@ -2,11 +2,13 @@ import React from 'react';
 import './EditKundaliBtn.styles.scss';
 import { Icon } from 'antd';
 
+import BirthDetailsFormModal from './../BirthDetailsFormModal/BirthDetailsFormModal.component';
+
 
 const EditKundaliBtn = (props) => {
 
   return (
-    <Icon type = "edit" className = "header__control-icon" title = "Edit Kundali"/>
+    <BirthDetailsFormModal isOldForm render = {(onClickHandler) => () => (<Icon className = "header__control-icon" onClick = {onClickHandler} type = "edit" title = "Edit Kundali"/>)} />
   )
 };
 

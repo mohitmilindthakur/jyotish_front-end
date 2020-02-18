@@ -5,7 +5,7 @@ import {Modal} from 'antd';
 
 import BirthDetailsForm from './../BirthDetailsForm/BirthDetailsForm.component';
 
-const BirthDetailsFormModal = ({render}) => {
+const BirthDetailsFormModal = ({render, isOldForm}) => {
 
   let [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -32,8 +32,9 @@ const BirthDetailsFormModal = ({render}) => {
           bodyStyle = {isMobileDisplay ? {height: "80vh"} : {height: "50vh"} }
           width = {isMobileDisplay ? "100vw" : "50vw"}
           style = {{top: 0}}
+          destroyOnClose
         >
-          <BirthDetailsForm />
+          <BirthDetailsForm onFormSubmit = {closeModal} isOldForm = {isOldForm}/>
         </Modal>
       </React.Fragment>
     );
