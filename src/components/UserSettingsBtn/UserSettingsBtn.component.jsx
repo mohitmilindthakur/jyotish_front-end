@@ -25,13 +25,14 @@ const UserSettingsBtn = (props) => {
     </Menu>
   );
 
+  
   return (
     <div>
       <Dropdown overlay = {menu} trigger = {['hover']} placement = "bottomCenter">
         <Icon type = "setting" className = "header__control-icon"/>
       </Dropdown>
 
-      <UserSettingsModal render = {() => CurrentModal } onModalClose = {() => setCurrentModal('')} />
+      <UserSettingsModal CurrentModal = {CurrentModal} onModalClose = {() => setCurrentModal('')} />
 
     </div>
   );

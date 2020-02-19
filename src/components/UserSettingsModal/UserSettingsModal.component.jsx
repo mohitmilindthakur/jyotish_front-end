@@ -6,7 +6,9 @@ import {Modal} from 'antd';
 
 const UserSettingsModal = (props) => {
 
-  let CurrentModal = props.render();
+  // let CurrentModal = props.render();
+
+  const {CurrentModal} = props;
 
   const onModalClose = () => props.onModalClose();
 
