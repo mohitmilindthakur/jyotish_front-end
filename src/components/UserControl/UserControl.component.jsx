@@ -5,8 +5,6 @@ import { Row, Col } from 'antd';
 import UserSettingsBtn from './../UserSettingsBtn/UserSettingsBtn.component';
 import UserProfileBtn from './../UserProfileBtn/UserProfileBtn.component';
 
-console.log('UserProfileBtn', UserProfileBtn)
-
 const UserControl = (props) => {
 
   return (

@@ -14,7 +14,7 @@ const SignInAndSignUp = (props) => {
     <Tabs defaultActiveKey = "1">
 
       <Tabs.TabPane tab = "Sign In" key = "1">
-        <SignIn />
+        <SignIn closeModal = {props.closeModal} />
       </Tabs.TabPane>
 
       <Tabs.TabPane tab = "Sign Up" key = "2">

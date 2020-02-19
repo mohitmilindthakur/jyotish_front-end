@@ -7,20 +7,24 @@ import {connect} from 'react-redux';
 
 import {selectBirthDetails} from './redux/birthDetails/birthDetails.selectors';
 import {selectKundaliSettings} from './redux/kundaliSettings/kundaliSettings.selectors';
+import {selectUserAuth} from './redux/currentUser/currentUser.selectors';
+
 import {setNewKundali} from './redux/kundali/kundali.actions';
+import {setCurrentUser} from './redux/currentUser/currentUser.actions';
 
 import axios from './config/axios.config';
 
 import Header from './components/Header/Header.component';
 import MainContent from './components/MainContent/MainContent.component';
 
+import {auth} from './firebase/firebase.config';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentUser: {}
-    }
   }
+
+  unsubscribeFromAuth = null;
 
   getKundali = () => {
     const {birthDetails, setKundali, kundaliSettings} = this.props
@@ -32,12 +36,15 @@ class App extends React.Component {
   }
 
   componentDidMount () {
+    const {currentUser, setUser} = this.props;
     this.getKundali();
+    auth.onAuthStateChanged((userAuth) => {
+      setUser(userAuth);
+    })
   }
 
   componentDidUpdate () {
     this.getKundali();
-    console.log('updated');
   }
 
   render () {
@@ -54,10 +61,12 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
   birthDetails: selectBirthDetails(state),
   kundaliSettings: selectKundaliSettings(state),
+  currentUser: selectUserAuth(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setKundali: (kundali) => dispatch(setNewKundali(kundali))
+  setKundali: (kundali) => dispatch(setNewKundali(kundali)),
+  setUser: (userAuth) => dispatch(setCurrentUser(userAuth))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
