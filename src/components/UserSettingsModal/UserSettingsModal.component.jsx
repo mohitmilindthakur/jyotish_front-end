@@ -6,16 +6,17 @@ import {Modal} from 'antd';
 
 const UserSettingsModal = (props) => {
 
-  let CurrentModal = props.render;
+  let CurrentModal = props.render();
 
   const onModalClose = () => props.onModalClose();
 
   return (
     <div>
-      <Modal visible = {Boolean(CurrentModal())} 
+      <Modal visible = {Boolean(CurrentModal)} 
         onCancel = {onModalClose}
+        footer = {null}
       >
-        {Boolean(CurrentModal()) && <CurrentModal/>}
+        {Boolean(CurrentModal) && <CurrentModal/>}
       </Modal>
     </div>
   )

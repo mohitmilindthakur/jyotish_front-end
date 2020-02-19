@@ -6,6 +6,9 @@ import { Icon, Dropdown, Menu} from 'antd';
 import UserSettingsModal from './../UserSettingsModal/UserSettingsModal.component';
 import UserKundaliSettings from './../UserKundaliSettings/UserKundaliSettings.component';
 
+console.log(UserKundaliSettings);
+
+
 const UserSettingsBtn = (props) => {
 
   let [CurrentModal, setCurrentModal] = useState('');
@@ -26,7 +29,7 @@ const UserSettingsBtn = (props) => {
 
   return (
     <div>
-      <Dropdown overlay = {menu} trigger = {['click', 'hover']} placement = "bottomCenter">
+      <Dropdown overlay = {menu} trigger = {['hover']} placement = "bottomCenter">
         <Icon type = "setting" className = "header__control-icon"/>
       </Dropdown>
 
