@@ -6,8 +6,6 @@ import { Icon, Dropdown, Menu} from 'antd';
 import UserSettingsModal from './../UserSettingsModal/UserSettingsModal.component';
 import UserKundaliSettings from './../UserKundaliSettings/UserKundaliSettings.component';
 
-console.log(UserKundaliSettings);
-
 
 const UserSettingsBtn = (props) => {
 

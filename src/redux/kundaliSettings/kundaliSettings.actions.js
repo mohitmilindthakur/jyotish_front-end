@@ -16,3 +16,8 @@ export const setHouseType = houseType => ({
     type: kundaliSettingsTypes.SET_HOUSE_TYPE,
     payload: houseType
 })
+
+export const setKundaliSettings = kundaliSettings => ({
+    type: kundaliSettingsTypes.SET_KUNDALI_SETTINGS,
+    payload: kundaliSettings
+})

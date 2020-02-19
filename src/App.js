@@ -6,6 +6,7 @@ import 'antd/dist/antd.css';
 import {connect} from 'react-redux';
 
 import {selectBirthDetails} from './redux/birthDetails/birthDetails.selectors';
+import {selectKundaliSettings} from './redux/kundaliSettings/kundaliSettings.selectors';
 import {setNewKundali} from './redux/kundali/kundali.actions';
 
 import axios from './config/axios.config';
@@ -13,10 +14,10 @@ import axios from './config/axios.config';
 import Header from './components/Header/Header.component';
 import MainContent from './components/MainContent/MainContent.component';
 
-const App = ({birthDetails, setKundali}) => {
+const App = ({birthDetails, setKundali, kundaliSettings}) => {
 
   useEffect(() => {
-    axios.post('/charts', birthDetails)
+    axios.post('/charts', {birthDetails, ...kundaliSettings})
     .then(data => {
       setKundali(data.data);
     })
@@ -32,7 +33,8 @@ const App = ({birthDetails, setKundali}) => {
 }
 
 const mapStateToProps = (state) => ({
-  birthDetails: selectBirthDetails(state)
+  birthDetails: selectBirthDetails(state),
+  kundaliSettings: selectKundaliSettings(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({

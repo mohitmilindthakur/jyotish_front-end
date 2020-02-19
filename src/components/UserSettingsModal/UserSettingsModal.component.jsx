@@ -16,7 +16,7 @@ const UserSettingsModal = (props) => {
         onCancel = {onModalClose}
         footer = {null}
       >
-        {Boolean(CurrentModal) && <CurrentModal/>}
+        {Boolean(CurrentModal) && <CurrentModal closeModal = {onModalClose} />}
       </Modal>
     </div>
   )
