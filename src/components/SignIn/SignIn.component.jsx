@@ -35,7 +35,7 @@ const SignIn = (props) => {
       <div className = "margin-u-2"><Input size = "large" required type = "password" name = "password" placeholder = "Password"  onChange = {handleChange} /></div>
       <div className = "text-center margin-u-3">
         <Button type = "outlined" htmlType = "submit">Sign In</Button>
-        <Button type = "primary" className = "margin-l-1" onClick = {handleGoogleSignIn} >Sign In With The Google</Button>
+        <Button type = "primary" className = "margin-l-1" onClick = {handleGoogleSignIn} >Sign In With Google</Button>
       </div>
     </Form>
   );

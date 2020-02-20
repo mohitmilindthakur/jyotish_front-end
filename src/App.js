@@ -20,10 +20,7 @@ import MainContent from './components/MainContent/MainContent.component';
 import {auth} from './firebase/firebase.config';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+ 
   unsubscribeFromAuth = null;
 
   getKundali = () => {
@@ -36,7 +33,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    const {currentUser, setUser} = this.props;
+    const {setUser} = this.props;
     this.getKundali();
     auth.onAuthStateChanged((userAuth) => {
       setUser(userAuth);
