@@ -1,7 +1,7 @@
 import currentUserTypes from './currentUser.types';
 
 const INITIAL_STATE = {
-    userAuth: {}
+    userAuth: null
 }
 
 const currentUserReducer = (state = INITIAL_STATE, action) => {

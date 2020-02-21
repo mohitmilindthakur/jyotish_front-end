@@ -16,7 +16,8 @@ const INITIAL_STATE = {
     lng: 80,
     timezone: 5.5,
     place: 'Hyderabad',
-    gender: 'female'
+    gender: 'female',
+    id: null
 }
 
 const birthDetailsReducer = (state = INITIAL_STATE, action) => {

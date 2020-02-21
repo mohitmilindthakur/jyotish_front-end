@@ -12,20 +12,20 @@ import {selectUserAuth} from './redux/currentUser/currentUser.selectors';
 import {setNewKundali} from './redux/kundali/kundali.actions';
 import {setCurrentUser} from './redux/currentUser/currentUser.actions';
 
-import axios from './config/axios.config';
+import {getKundali as getKundaliFromServer} from './utils/axios.routes';
 
 import Header from './components/Header/Header.component';
 import MainContent from './components/MainContent/MainContent.component';
 
-import {auth} from './firebase/firebase.config';
+import {auth, addUserToFirestore} from './firebase/firebase.config';
 
 class App extends React.Component {
  
   unsubscribeFromAuth = null;
 
   getKundali = () => {
-    const {birthDetails, setKundali, kundaliSettings} = this.props
-    axios.post('/charts', {birthDetails, ...kundaliSettings})
+    const {birthDetails, setKundali, kundaliSettings} = this.props;
+    getKundaliFromServer(birthDetails, kundaliSettings)
     .then(data => {
       setKundali(data.data);
     })
@@ -35,8 +35,16 @@ class App extends React.Component {
   componentDidMount () {
     const {setUser} = this.props;
     this.getKundali();
-    auth.onAuthStateChanged((userAuth) => {
-      setUser(userAuth);
+    auth.onAuthStateChanged( async (userAuth) => {
+      if (userAuth){
+        const userRef = await addUserToFirestore(userAuth);
+        userRef.onSnapshot((snapshot) => {
+          setUser({...snapshot.data(), id: snapshot.id})
+        })
+      }
+      else {
+        setUser(userAuth)
+      }
     })
   }
 

@@ -19,7 +19,8 @@ class BirthDetailsForm extends React.Component {
       lat: '',
       lng: '',
       timezone: '',
-      place: ''
+      place: '',
+      id: ''
     }
   }
 
