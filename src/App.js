@@ -17,7 +17,9 @@ import {getKundali as getKundaliFromServer} from './utils/axios.routes';
 import Header from './components/Header/Header.component';
 import MainContent from './components/MainContent/MainContent.component';
 
-import {auth, addUserToFirestore} from './firebase/firebase.config';
+import {auth} from './firebase/firebase.config';
+
+import {addUserToFirestore} from './firebase/firestore/firestore';
 
 class App extends React.Component {
  
@@ -48,8 +50,10 @@ class App extends React.Component {
     })
   }
 
-  componentDidUpdate () {
-    this.getKundali();
+  componentDidUpdate (prevProps) {
+    if ((prevProps.birthDetails !== this.props.birthDetails) || (prevProps.kundaliSettings !== this.props.kundaliSettings)) {
+      this.getKundali();
+    }
   }
 
   render () {

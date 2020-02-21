@@ -20,7 +20,7 @@ class BirthDetailsForm extends React.Component {
       lng: '',
       timezone: '',
       place: '',
-      id: ''
+      id: null
     }
   }
 

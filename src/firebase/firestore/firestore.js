@@ -26,7 +26,7 @@ export const addKundaliToFirestore = async (birthDetails) => {
 
   if (birthDetails.id) {
     const kundaliDocRef = firestore.doc(`/kundalis/${birthDetails.id}`);
-    const kundaliDocSnapshot = kundaliDocRef.get();
+    const kundaliDocSnapshot = await kundaliDocRef.get();
 
     if (kundaliDocSnapshot.exists) {
       await kundaliDocRef.update({...birthDetails});
@@ -59,10 +59,12 @@ export const addKundaliForAUser = async (userUID, birthDetails) => {
 
   if (userSnapshot.exists) {
     try{
-      return await userRef.update({
-        kundalis: firebase.firestore.FieldValue.arrayUnion(kundaliDocRef)
+      await userRef.update({
+        kundalis: firestore.FieldValue.arrayUnion(kundaliDocRef)
       })
     }catch(err) {
     }
   }
+
+  return kundaliDocRef;
 }
