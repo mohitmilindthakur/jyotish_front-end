@@ -8,7 +8,7 @@ import UserProfileBtn from './../UserProfileBtn/UserProfileBtn.component';
 const UserControl = (props) => {
 
   return (
-    <Row type = "flex" justify = "space-around">
+    <Row type = "flex" justify = "space-around" align = "middle">
 
       <Col>
         <UserSettingsBtn />

@@ -4,17 +4,25 @@ import './KundaliControl.styles.scss';
 
 import { Row, Col } from 'antd';
 
+import {connect} from 'react-redux';
+import {selectUserAuth} from './../../redux/currentUser/currentUser.selectors.js';
+
+import OpenKundaliBtn from './../OpenKundaliBtn/OpenKundaliBtn.component';
 import NewKundaliBtn from './../NewKundaliBtn/NewKundaliBtn.component';
 import EditKundaliBtn from './../EditKundaliBtn/EditKundaliBtn.component';
 import SaveKundaliBtn from './../SaveKundaliBtn/SaveKundaliBtn.component';
 import ShareKundaliBtn from './../ShareKundaliBtn/ShareKundaliBtn.component';
 import DownloadKundaliBtn from './../DownloadKundaliBtn/DownloadKundaliBtn.component';
 
-const KundaliControl = (props) => {
+const KundaliControl = ({userAuth}) => {
 
     return (
       <React.Fragment>
         <Row type = "flex" justify = "space-around">
+
+          {userAuth && (<Col>
+            <OpenKundaliBtn />
+          </Col>)}
 
           <Col>
             <NewKundaliBtn />
@@ -24,9 +32,9 @@ const KundaliControl = (props) => {
             <EditKundaliBtn />
           </Col>
 
-          <Col>
+          {userAuth && (<Col>
             <SaveKundaliBtn />
-          </Col>
+          </Col>)}
 
           <Col>
             <ShareKundaliBtn />
@@ -41,4 +49,8 @@ const KundaliControl = (props) => {
     );
   }
 
-export default KundaliControl;
+const mapStateToProps = (state) => ({
+  userAuth: selectUserAuth(state)
+})
+
+export default connect(mapStateToProps)(KundaliControl);

@@ -21,8 +21,14 @@ import {auth} from './firebase/firebase.config';
 
 import {addUserToFirestore} from './firebase/firestore/firestore';
 
+import {Spin} from 'antd';
+
 class App extends React.Component {
- 
+  
+  state = {
+    isLoading: true
+  }
+
   unsubscribeFromAuth = null;
 
   getKundali = () => {
@@ -42,9 +48,11 @@ class App extends React.Component {
         const userRef = await addUserToFirestore(userAuth);
         userRef.onSnapshot((snapshot) => {
           setUser({...snapshot.data(), id: snapshot.id})
+          this.setState({isLoading: false})
         })
       }
       else {
+        this.setState({isLoading: false})
         setUser(userAuth)
       }
     })
@@ -59,10 +67,16 @@ class App extends React.Component {
   render () {
 
     return(
-      <div className="App">
-        <Header />
-        <MainContent />
-    </div>
+      this.state.isLoading ?
+
+      <div className = "loader-container"><Spin size = "large" className = "loader"></Spin></div>
+
+      :
+
+      (<div className="App">
+          <Header />
+          <MainContent />
+      </div>)
     )
   }
 }
