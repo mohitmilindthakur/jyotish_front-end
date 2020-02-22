@@ -3,10 +3,21 @@ import './MainContent.styles.scss';
 
 import { Row, Col } from 'antd';
 
+import {connect} from 'react-redux';
+
 import KundaliContainer from './../KundaliContainer/KundaliContainer.component';
 import KundaliInfo from './../KundaliInfo/KundaliInfo.component';
 
-const MainContent = (props) => {
+import {selectKundaliSettings} from './../../redux/kundaliSettings/kundaliSettings.selectors.js';
+import {selectBirthDetails} from './../../redux/birthDetails/birthDetails.selectors.js';
+import {fetchKundaliFromServerAsync} from './../../redux/kundali/kundali.actions';
+
+
+const MainContent = ({setKundali, birthDetails, kundaliSettings}) => {
+
+  React.useEffect(() => {
+    setKundali(birthDetails, kundaliSettings);
+  })
 
   return (
     <div className="main-content">
@@ -25,4 +36,13 @@ const MainContent = (props) => {
   )
 }
 
-export default MainContent;
+const mapStateToProps = (state) => ({
+  birthDetails: selectBirthDetails(state),
+  kundaliSettings: selectKundaliSettings(state)
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setKundali: (birthDetails, kundaliSettings) => dispatch(fetchKundaliFromServerAsync(birthDetails, kundaliSettings))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainContent);

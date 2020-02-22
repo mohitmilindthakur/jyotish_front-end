@@ -9,9 +9,6 @@ const INITIAL_STATE = {
 
 const kundaliReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case  kundaliTypes.SET_NEW_KUNDALI:
-            return {...action.payload};
-
          case kundaliTypes.FETCH_KUNDALI_FROM_SERVER_START:
             return {...state, isFetching: true}
 

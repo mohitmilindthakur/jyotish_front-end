@@ -5,14 +5,10 @@ import 'antd/dist/antd.css';
 
 import {connect} from 'react-redux';
 
-import {selectBirthDetails} from './redux/birthDetails/birthDetails.selectors';
-import {selectKundaliSettings} from './redux/kundaliSettings/kundaliSettings.selectors';
 import {selectUserAuth} from './redux/currentUser/currentUser.selectors';
 
-import {fetchKundaliFromServerAsync} from './redux/kundali/kundali.actions';
 import {setCurrentUser} from './redux/currentUser/currentUser.actions';
 
-import {getKundali as getKundaliFromServer} from './utils/axios.routes';
 
 import Header from './components/Header/Header.component';
 import MainContent from './components/MainContent/MainContent.component';
@@ -38,8 +34,7 @@ class App extends React.Component {
 
   componentDidMount () {
 
-    const {setUser, setKundali, birthDetails, kundaliSettings} = this.props;
-    setKundali(birthDetails, kundaliSettings);
+    const {setUser} = this.props;
 
     auth.onAuthStateChanged( async (userAuth) => {
       if (userAuth){
@@ -62,12 +57,6 @@ class App extends React.Component {
     })
   }
 
-  componentDidUpdate (prevProps) {
-    if ((prevProps.birthDetails !== this.props.birthDetails) || (prevProps.kundaliSettings !== this.props.kundaliSettings)) {
-      // this.getKundali();
-    }
-  }
-
   render () {
 
     return(
@@ -86,15 +75,11 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  birthDetails: selectBirthDetails(state),
-  kundaliSettings: selectKundaliSettings(state),
-  currentUser: selectUserAuth(state),
   allKundalis: selectUserKundalis(state)
 
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setKundali: (birthDetails, kundaliSettings) => dispatch(fetchKundaliFromServerAsync(birthDetails, kundaliSettings)),
   setUser: (userAuth) => dispatch(setCurrentUser(userAuth)),
   setUserKundalis: (allKundalis) => dispatch(setAllUserKundalis(allKundalis))
 
