@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './SaveKundaliBtn.styles.scss';
 import { Icon } from 'antd';
 
-import {addKundaliForAUser} from './../../firebase/firestore/firestore.js';
+import {saveKundali} from './../../firebase/firestore/firestore.js';
 
 import {connect} from 'react-redux';
 import {selectUserAuth} from './../../redux/currentUser/currentUser.selectors';
@@ -19,7 +19,7 @@ const SaveKundaliBtn = ({birthDetails, currentUser, setBirthDetails}) => {
   const handleSaveKundali = async () => {
     if (currentUser){
       setLoading(true);
-      const kundaliRef = await addKundaliForAUser(currentUser.id, birthDetails);
+      const kundaliRef = await saveKundali(currentUser.id, birthDetails);
       if (!birthDetails.id){
         const kundaliId = kundaliRef.id
         setBirthDetails({...birthDetails, id: kundaliId});

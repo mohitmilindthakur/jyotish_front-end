@@ -1,12 +1,32 @@
 import React from 'react';
 import './OpenKundaliBtn.styles.scss';
-import { Icon } from 'antd';
+import { Icon, Modal, Menu } from 'antd';
+
+import OpenKundaliModal from './../OpenKundaliModal/OpenKundaliModal.component';
 
 
 const OpenKundaliBtn = (props) => {
 
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  const closeModal = () => setIsVisible(false);
+  const openModal = () => setIsVisible(true);
+  
     return (
-      <Icon type = "folder-open" className = "header__control-icon" title = "Open Kundali"/>
+      <React.Fragment>
+        <Icon type = "folder-open" className = "header__control-icon" onClick = {openModal} title = "Open Kundali"/>
+
+        <Modal
+          visible = {isVisible}
+          onCancel = {closeModal}
+          footer = {null}
+          title = "Open Kundali"
+          destroyOnClose = {true}
+        >
+          <OpenKundaliModal closeModal = {closeModal} />
+
+        </Modal>
+      </React.Fragment>
     );
   }
 

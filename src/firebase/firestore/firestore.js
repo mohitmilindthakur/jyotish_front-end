@@ -1,4 +1,4 @@
-import {firestore} from './../firebase.config';
+import firebase, {firestore} from './../firebase.config';
 
 //ADDING USER TO THE FIRESTORE
 
@@ -59,12 +59,61 @@ export const addKundaliForAUser = async (userUID, birthDetails) => {
 
   if (userSnapshot.exists) {
     try{
+        console.log('entered')
       await userRef.update({
-        kundalis: firestore.FieldValue.arrayUnion(kundaliDocRef)
+        kundalis: firebase.firestore.FieldValue.arrayUnion(kundaliDocRef)
       })
     }catch(err) {
     }
   }
 
   return kundaliDocRef;
+}
+
+// GET KUNDALI DETAILS FROM KUNDALI REF
+export const getKundali = async (kundaliRef) => {
+    const kundaliSnapshot = await kundaliRef.get();
+    return kundaliSnapshot.data();
+}
+
+// GET ALL KUNDALIS OF A USER
+export const getAllKundalisOfAUser = async (userID) => {
+    const userRef = firestore.doc(`/users/${userID}`);
+
+    const userSnapshot = await userRef.get();
+
+    let allKundalisPromise;
+    let allKundalis;
+
+    if (userSnapshot.exists) {
+
+        const {kundalis} = userSnapshot.data();
+
+        allKundalisPromise = kundalis.map(async (kundaliRef) => {
+            const kundaliSnapshot = await kundaliRef.get();
+            console.log(kundaliSnapshot);
+            const kundali = kundaliSnapshot.exists && kundaliSnapshot.data();
+            console.log(kundali); 
+            return kundali;
+        })
+
+        allKundalis = await Promise.all(allKundalisPromise)
+    }
+    console.log('all kundalis inside the firestore.js file', allKundalis);
+
+    return allKundalis;
+}
+
+//SAVING A KUNDALI
+
+export const saveKundali = async (userID, birthDetails) => {
+  if (birthDetails.id) {
+    const kundaliRef = firestore.doc(`/kundalis/${birthDetails.id}`);
+    await kundaliRef.update({...birthDetails});
+    return kundaliRef;
+  }
+
+  else {
+    return addKundaliForAUser(userID, birthDetails)
+  }
 }

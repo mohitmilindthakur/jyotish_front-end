@@ -23,6 +23,11 @@ import {addUserToFirestore} from './firebase/firestore/firestore';
 
 import {Spin} from 'antd';
 
+
+import {getAllKundalisOfAUser} from './firebase/firestore/firestore.js';
+import {selectUserKundalis} from './redux/userKundalis/userKundalis.selectors';
+import {setAllUserKundalis} from './redux/userKundalis/userKundalis.actions.js';
+
 class App extends React.Component {
   
   state = {
@@ -46,9 +51,15 @@ class App extends React.Component {
     auth.onAuthStateChanged( async (userAuth) => {
       if (userAuth){
         const userRef = await addUserToFirestore(userAuth);
-        userRef.onSnapshot((snapshot) => {
+        userRef.onSnapshot( async (snapshot) => {
           setUser({...snapshot.data(), id: snapshot.id})
           this.setState({isLoading: false})
+
+          if (snapshot.id) {
+            const allKundalis = await getAllKundalisOfAUser(snapshot.id);
+            this.props.setUserKundalis(allKundalis);
+          }
+
         })
       }
       else {
@@ -84,12 +95,16 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
   birthDetails: selectBirthDetails(state),
   kundaliSettings: selectKundaliSettings(state),
-  currentUser: selectUserAuth(state)
+  currentUser: selectUserAuth(state),
+  allKundalis: selectUserKundalis(state)
+
 })
 
 const mapDispatchToProps = (dispatch) => ({
   setKundali: (kundali) => dispatch(setNewKundali(kundali)),
-  setUser: (userAuth) => dispatch(setCurrentUser(userAuth))
+  setUser: (userAuth) => dispatch(setCurrentUser(userAuth)),
+  setUserKundalis: (allKundalis) => dispatch(setAllUserKundalis(allKundalis))
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

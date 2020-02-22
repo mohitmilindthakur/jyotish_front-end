@@ -14,13 +14,20 @@ import SaveKundaliBtn from './../SaveKundaliBtn/SaveKundaliBtn.component';
 import ShareKundaliBtn from './../ShareKundaliBtn/ShareKundaliBtn.component';
 import DownloadKundaliBtn from './../DownloadKundaliBtn/DownloadKundaliBtn.component';
 
-const KundaliControl = ({userAuth}) => {
+class KundaliControl extends React.Component {
 
+  componentDidUpdate () {
+    console.log(this.props);
+    
+  }
+
+  render () {
+    const {userAuth} = this.props;
     return (
       <React.Fragment>
         <Row type = "flex" justify = "space-around">
 
-          {userAuth && (<Col>
+          {userAuth && userAuth.kundalis && !!userAuth.kundalis.length && (<Col>
             <OpenKundaliBtn />
           </Col>)}
 
@@ -48,9 +55,10 @@ const KundaliControl = ({userAuth}) => {
       </React.Fragment>
     );
   }
+}
 
 const mapStateToProps = (state) => ({
-  userAuth: selectUserAuth(state)
+  userAuth: selectUserAuth(state),
 })
 
 export default connect(mapStateToProps)(KundaliControl);
