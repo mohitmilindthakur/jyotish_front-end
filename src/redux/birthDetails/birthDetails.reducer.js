@@ -22,7 +22,7 @@ const INITIAL_STATE = {
 
 const birthDetailsReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case birthDetailsTypes.CREATE_NEW_BIRTH_DETAILS:
+        case birthDetailsTypes.SET_NEW_BIRTH_DETAILS:
             return {...action.payload}
     
         default:

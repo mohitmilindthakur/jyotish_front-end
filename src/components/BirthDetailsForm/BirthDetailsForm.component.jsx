@@ -4,7 +4,7 @@ import './BirthDetailsForm.styles.scss';
 import {connect} from 'react-redux';
 
 import {selectBirthDetails} from './../../redux/birthDetails/birthDetails.selectors.js';
-import {createNewBirthDetails} from './../../redux/birthDetails/birthDetails.actions.js';
+import {setNewBirthDetails} from './../../redux/birthDetails/birthDetails.actions.js';
 
 import {Form, Row, Col, Input, Icon, Button, Radio} from 'antd';
 
@@ -122,7 +122,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setBirthDetails: (birthDetails) => dispatch(createNewBirthDetails(birthDetails))
+  setBirthDetails: (birthDetails) => dispatch(setNewBirthDetails(birthDetails))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BirthDetailsForm);

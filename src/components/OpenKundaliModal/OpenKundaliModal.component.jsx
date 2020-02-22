@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 
 import {selectUserKundalis} from './../../redux/userKundalis/userKundalis.selectors.js';
 
-import {createNewBirthDetails} from './../../redux/birthDetails/birthDetails.actions.js';
+import {setNewBirthDetails} from './../../redux/birthDetails/birthDetails.actions.js';
 
 const OpenKundaliModal = ({allKundalis, setBirthDetails, closeModal}) => {
 
@@ -51,7 +51,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setBirthDetails: (birthDetails) => dispatch(createNewBirthDetails(birthDetails))
+  setBirthDetails: (birthDetails) => dispatch(setNewBirthDetails(birthDetails))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OpenKundaliModal);

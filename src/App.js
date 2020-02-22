@@ -9,7 +9,7 @@ import {selectBirthDetails} from './redux/birthDetails/birthDetails.selectors';
 import {selectKundaliSettings} from './redux/kundaliSettings/kundaliSettings.selectors';
 import {selectUserAuth} from './redux/currentUser/currentUser.selectors';
 
-import {setNewKundali} from './redux/kundali/kundali.actions';
+import {fetchKundaliFromServerAsync} from './redux/kundali/kundali.actions';
 import {setCurrentUser} from './redux/currentUser/currentUser.actions';
 
 import {getKundali as getKundaliFromServer} from './utils/axios.routes';
@@ -36,18 +36,11 @@ class App extends React.Component {
 
   unsubscribeFromAuth = null;
 
-  getKundali = () => {
-    const {birthDetails, setKundali, kundaliSettings} = this.props;
-    getKundaliFromServer(birthDetails, kundaliSettings)
-    .then(data => {
-      setKundali(data.data);
-    })
-    .catch((err) => alert('something went wrong! Please Try Again', err));
-  }
-
   componentDidMount () {
-    const {setUser} = this.props;
-    this.getKundali();
+
+    const {setUser, setKundali, birthDetails, kundaliSettings} = this.props;
+    setKundali(birthDetails, kundaliSettings);
+
     auth.onAuthStateChanged( async (userAuth) => {
       if (userAuth){
         const userRef = await addUserToFirestore(userAuth);
@@ -56,8 +49,8 @@ class App extends React.Component {
           this.setState({isLoading: false})
 
           if (snapshot.id) {
-            const allKundalis = await getAllKundalisOfAUser(snapshot.id);
-            this.props.setUserKundalis(allKundalis);
+            // const allKundalis = await getAllKundalisOfAUser(snapshot.id);
+            // this.props.setUserKundalis(allKundalis);
           }
 
         })
@@ -71,7 +64,7 @@ class App extends React.Component {
 
   componentDidUpdate (prevProps) {
     if ((prevProps.birthDetails !== this.props.birthDetails) || (prevProps.kundaliSettings !== this.props.kundaliSettings)) {
-      this.getKundali();
+      // this.getKundali();
     }
   }
 
@@ -101,7 +94,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setKundali: (kundali) => dispatch(setNewKundali(kundali)),
+  setKundali: (birthDetails, kundaliSettings) => dispatch(fetchKundaliFromServerAsync(birthDetails, kundaliSettings)),
   setUser: (userAuth) => dispatch(setCurrentUser(userAuth)),
   setUserKundalis: (allKundalis) => dispatch(setAllUserKundalis(allKundalis))
 

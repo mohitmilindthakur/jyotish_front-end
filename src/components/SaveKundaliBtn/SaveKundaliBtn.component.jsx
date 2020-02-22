@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {selectUserAuth} from './../../redux/currentUser/currentUser.selectors';
 import {selectBirthDetails} from './../../redux/birthDetails/birthDetails.selectors';
 
-import {createNewBirthDetails} from './../../redux/birthDetails/birthDetails.actions.js';
+import {setNewBirthDetails} from './../../redux/birthDetails/birthDetails.actions.js';
 
 
 
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setBirthDetails: (birthDetails) => dispatch(createNewBirthDetails(birthDetails))
+  setBirthDetails: (birthDetails) => dispatch(setNewBirthDetails(birthDetails))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveKundaliBtn);
