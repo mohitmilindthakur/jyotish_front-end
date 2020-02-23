@@ -13,32 +13,38 @@ import {selectBirthDetails} from './../../redux/birthDetails/birthDetails.select
 import {fetchKundaliFromServerAsync} from './../../redux/kundali/kundali.actions';
 
 
-const MainContent = ({setKundali, birthDetails, kundaliSettings}) => {
+class MainContent extends React.Component {
 
-  React.useEffect(() => {
+  componentDidMount() {
+    const {setKundali, birthDetails, kundaliSettings} = this.props;
     setKundali(birthDetails, kundaliSettings);
-  })
+  }
 
-  return (
-    <div className="main-content">
-      <Row type = "flex">
+  render () {
+
+    return (
+      <div className="main-content">
+
+        <Row type = "flex">
+          
+          <Col xs = {24} md = {12} lg = {10} xxl = {9} >
+            <KundaliContainer />
+          </Col>
+
+          <Col xs = {24} md = {12} lg = {14} xxl = {15} >
+            <KundaliInfo />
+          </Col>
         
-        <Col xs = {24} md = {12} lg = {10} xxl = {9} >
-          <KundaliContainer />
-        </Col>
+        </Row>
 
-        <Col xs = {24} md = {12} lg = {14} xxl = {15} >
-          <KundaliInfo />
-        </Col>
-      
-      </Row>
-    </div>
-  )
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = (state) => ({
   birthDetails: selectBirthDetails(state),
-  kundaliSettings: selectKundaliSettings(state)
+  kundaliSettings: selectKundaliSettings(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({

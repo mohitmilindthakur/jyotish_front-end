@@ -44,8 +44,8 @@ class App extends React.Component {
           this.setState({isLoading: false})
 
           if (snapshot.id) {
-            // const allKundalis = await getAllKundalisOfAUser(snapshot.id);
-            // this.props.setUserKundalis(allKundalis);
+            const allKundalis = await getAllKundalisOfAUser(snapshot.id);
+            this.props.setUserKundalis(allKundalis);
           }
 
         })

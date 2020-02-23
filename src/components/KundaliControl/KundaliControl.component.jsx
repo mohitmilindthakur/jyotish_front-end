@@ -17,7 +17,6 @@ import DownloadKundaliBtn from './../DownloadKundaliBtn/DownloadKundaliBtn.compo
 class KundaliControl extends React.Component {
 
   componentDidUpdate () {
-    console.log(this.props);
     
   }
 

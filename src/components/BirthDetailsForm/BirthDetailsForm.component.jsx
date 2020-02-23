@@ -4,7 +4,8 @@ import './BirthDetailsForm.styles.scss';
 import {connect} from 'react-redux';
 
 import {selectBirthDetails} from './../../redux/birthDetails/birthDetails.selectors.js';
-import {setNewBirthDetails} from './../../redux/birthDetails/birthDetails.actions.js';
+import {setNewBirthDetailsAndSetKundali} from './../../redux/birthDetails/birthDetails.actions.js';
+import {selectKundaliSettings} from './../../redux/kundaliSettings/kundaliSettings.selectors.js';
 
 import {Form, Row, Col, Input, Icon, Button, Radio} from 'antd';
 
@@ -118,11 +119,12 @@ class BirthDetailsForm extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  birthDetails: selectBirthDetails(state)
+  birthDetails: selectBirthDetails(state),
+  kundaliSettings: selectKundaliSettings(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setBirthDetails: (birthDetails) => dispatch(setNewBirthDetails(birthDetails))
+  setBirthDetails: (birthDetails) => dispatch(setNewBirthDetailsAndSetKundali(birthDetails))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BirthDetailsForm);
