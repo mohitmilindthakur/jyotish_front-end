@@ -53,6 +53,7 @@ class App extends React.Component {
       else {
         this.setState({isLoading: false})
         setUser(userAuth)
+        this.props.setUserKundalis([]);
       }
     })
   }
