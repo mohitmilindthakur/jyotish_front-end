@@ -7,7 +7,9 @@ import {selectBirthDetails} from './../../redux/birthDetails/birthDetails.select
 import {setNewBirthDetailsAndSetKundali} from './../../redux/birthDetails/birthDetails.actions.js';
 import {selectKundaliSettings} from './../../redux/kundaliSettings/kundaliSettings.selectors.js';
 
-import {Form, Row, Col, Input, Icon, Button, Radio} from 'antd';
+import {getLocationAxios} from './../../utils/axios.routes.js';
+
+import {Form, Row, Col, Input, Icon, Button, Radio, AutoComplete} from 'antd';
 
 class BirthDetailsForm extends React.Component {
   constructor() {
@@ -21,7 +23,10 @@ class BirthDetailsForm extends React.Component {
       lng: '',
       timezone: '',
       place: '',
-      id: null
+      id: null,
+      searchedPlaces: [],
+      searchedResultsPromise: [],
+      searchedResults: null
     }
   }
 
@@ -32,11 +37,50 @@ class BirthDetailsForm extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.setBirthDetails(this.state);
+    let { searchedPlaces, searchedResultsPromise, searchedResults, ...birthDetails } = this.state;
+    this.props.setBirthDetails(birthDetails);
 
     if (this.props.onFormSubmit) {
       this.props.onFormSubmit();
     }
+  }
+
+  handlePlaceChange = (location) => {
+    this.setState({place: location});
+    if (location.length > 3) {
+      this.setState((prevState) => ({searchedPlaces: [...prevState.searchedPlaces, location]}), () => this.getLocation(location))
+    }
+  }
+
+  getLocation = async (location) => {
+    this.setState((prevState) => ({searchedResultsPromise: [...prevState.searchedResultsPromise, getLocationAxios(location)]}), () => {
+      Promise.all(this.state.searchedResultsPromise)
+      .then(data => {
+      let allLocations = data.slice(-1)[0].data;
+      this.setState({searchedResults: allLocations})
+    })
+    });
+  }
+
+  generateLocationsListForDisplay() {
+    return this.state.searchedResults.map((location) => (
+      <AutoComplete.Option key = {location.geohash} value = {location.geohash} >
+        {location.flag} {location.formatted}
+      </AutoComplete.Option>
+      )
+    )
+  }
+
+  onSearchBlur = () => {
+    this.setState({searchedPlaces: [], searchedResultsPromise: [], searchedResults: null})
+  }
+
+  handleSelectLocation = (selectedLocation) => {
+    const searchedLocation = this.state.searchedResults.find(location => location.geohash === selectedLocation);
+    
+    const {lat, lng, formatted:place, timezone} = searchedLocation;
+    this.setState({lat, lng, place, timezone})
+    this.onSearchBlur();
   }
 
   componentDidMount () {
@@ -46,6 +90,8 @@ class BirthDetailsForm extends React.Component {
   }
 
   render() {
+
+    const options = this.state.searchedResults && this.generateLocationsListForDisplay();
 
     return (
       <Form onSubmit = {this.onFormSubmit} className = "birth-details__form">
@@ -65,27 +111,31 @@ class BirthDetailsForm extends React.Component {
           </Col>
         </Row>
 
-        <Form.Item className = "birth-details__form-item">
-          <Input.Search required size = "large" prefix = {<Icon type = "compass" />} onChange = {this.handleChange} value = {this.state.place} name = "place" placeholder = "Place" />
-        </Form.Item>
+        {/* <Form.Item className = "birth-details__form-item">
+          <Input.Search required size = "large" prefix = {<Icon type = "compass" />} onChange = {this.handleChange} value = {this.state.place} onKeyUp = {this.handlePlaceChange} name = "place" placeholder = "Place" />
+        </Form.Item> */}
+
+        <AutoComplete dataSource = {options} value = {this.state.place} onChange = {this.handlePlaceChange} onSelect = {this.handleSelectLocation} placeholder = "Place">
+
+        </AutoComplete>
 
         <Row type = "flex" justify = "space-between" align = "middle">
 
           <Col span = {7} >
             <Form.Item className = "birth-details__form-item">
-              <Input required size = "large" pattern = "[0-9]+([\.][0-9]+)?" onChange = {this.handleChange} value = {this.state.lat} name = "lat" placeholder = "Latitude" />
+              <Input required size = "large"  onChange = {this.handleChange} value = {this.state.lat} name = "lat" placeholder = "Latitude" />
             </Form.Item>
           </Col>
 
           <Col span = {7} >
             <Form.Item className = "birth-details__form-item">
-              <Input required size = "large" pattern = "[0-9]+([\.][0-9]+)?" onChange = {this.handleChange} value = {this.state.lng} name = "lng" placeholder = "Longitude"/>
+              <Input required size = "large" onChange = {this.handleChange} value = {this.state.lng} name = "lng" placeholder = "Longitude"/>
             </Form.Item>
           </Col>
 
           <Col span = {7} >
             <Form.Item className = "birth-details__form-item">
-              <Input required size = "large" pattern = "[0-9]+([\.][0-9]+)?" onChange = {this.handleChange} value = {this.state.timezone} name = "timezone" placeholder = "timezone"/>
+              <Input required size = "large" onChange = {this.handleChange} value = {this.state.timezone} name = "timezone" placeholder = "timezone"/>
             </Form.Item>
           </Col>
 
