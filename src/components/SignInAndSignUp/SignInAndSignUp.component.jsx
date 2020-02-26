@@ -5,6 +5,7 @@ import './SignInAndSignUp.styles.scss';
 import {connect} from 'react-redux';
 
 import SignIn from './../SignIn/SignIn.component';
+import SignUp from './../SignUp/SignUp.component';
 
 
 import {Tabs} from 'antd';
@@ -18,7 +19,7 @@ const SignInAndSignUp = (props) => {
       </Tabs.TabPane>
 
       <Tabs.TabPane tab = "Sign Up" key = "2">
-        Sign Up
+        <SignUp closeModal = {props.closeModal} />
       </Tabs.TabPane>
 
     </Tabs>

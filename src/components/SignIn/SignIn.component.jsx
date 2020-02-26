@@ -18,19 +18,21 @@ const SignIn = (props) => {
     setSignInDetails({...signInDetails, [name]: value})
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    props.closeModal();
-  }
-
   const handleGoogleSignIn = () => {
     signInWithGoogle()
     .then(() => props.closeModal())
     .catch((err) => alert("Error! Please Try Again Later"))
   }
 
+  const handleSignIn = (event) => {
+    event.preventDefault();
+    auth.signInWithEmailAndPassword(signInDetails.email, signInDetails.password)
+    .then(() => props.closeModal())
+    .catch(error => alert(error.message))
+  }
+
   return (
-    <Form onSubmit = {handleSubmit} >
+    <Form onSubmit = {handleSignIn} >
       <div className = "margin-u-2"><Input size = "large" required name = "email" placeholder = "Email" label = "Email" onChange = {handleChange} /></div>
       <div className = "margin-u-2"><Input size = "large" required type = "password" name = "password" placeholder = "Password"  onChange = {handleChange} /></div>
       <div className = "text-center margin-u-3">

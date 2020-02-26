@@ -2,7 +2,7 @@ import firebase, {firestore} from './../firebase.config';
 
 //ADDING USER TO THE FIRESTORE
 
-export const addUserToFirestore = async (userAuth) => {
+export const addUserToFirestore = async (userAuth, additionalData = {}) => {
   if (!userAuth) return;
 
   const userRef = firestore.doc(`/users/${userAuth.uid}`);
@@ -13,7 +13,7 @@ export const addUserToFirestore = async (userAuth) => {
     const {email, displayName, photoURL, uid} = userAuth;
 
     try {
-      await userRef.set({email, displayName, photoURL, uid, kundalis: [], kundaliSettings: {}})
+      await userRef.set({email, displayName, photoURL, uid, kundalis: [], kundaliSettings: {}, ...additionalData})
     }catch(err) {
       console.log("Error!", err.message)
     }

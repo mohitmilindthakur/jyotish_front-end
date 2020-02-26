@@ -1,6 +1,6 @@
 import React from 'react';
 import './OpenKundaliBtn.styles.scss';
-import { Icon, Modal, Menu } from 'antd';
+import { Icon, Modal} from 'antd';
 
 import OpenKundaliModal from './../OpenKundaliModal/OpenKundaliModal.component';
 

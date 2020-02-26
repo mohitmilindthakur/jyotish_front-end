@@ -5,8 +5,6 @@ import 'antd/dist/antd.css';
 
 import {connect} from 'react-redux';
 
-import {selectUserAuth} from './redux/currentUser/currentUser.selectors';
-
 import {setCurrentUser} from './redux/currentUser/currentUser.actions';
 
 
@@ -48,7 +46,9 @@ class App extends React.Component {
           if (snapshot.id) {
             const allKundalis = await getAllKundalisOfAUser(snapshot.id);
             this.props.setUserKundalis(allKundalis);
-            this.props.setKundaliSettingsAndUpdateCharts(snapshot.data().kundaliSettings)
+            const userData = snapshot.data();
+            console.log('UserData', userData);
+            userData && this.props.setKundaliSettingsAndUpdateCharts(snapshot.data().kundaliSettings)
           }
 
         })
