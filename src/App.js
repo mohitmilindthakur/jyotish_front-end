@@ -47,7 +47,6 @@ class App extends React.Component {
             const allKundalis = await getAllKundalisOfAUser(snapshot.id);
             this.props.setUserKundalis(allKundalis);
             const userData = snapshot.data();
-            console.log('UserData', userData);
             userData && this.props.setKundaliSettingsAndUpdateCharts(snapshot.data().kundaliSettings)
           }
 
