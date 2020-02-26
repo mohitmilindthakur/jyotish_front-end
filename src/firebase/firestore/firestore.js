@@ -13,7 +13,7 @@ export const addUserToFirestore = async (userAuth) => {
     const {email, displayName, photoURL, uid} = userAuth;
 
     try {
-      await userRef.set({email, displayName, photoURL, uid, kundalis: []})
+      await userRef.set({email, displayName, photoURL, uid, kundalis: [], kundaliSettings: {}})
     }catch(err) {
       console.log("Error!", err.message)
     }
@@ -111,5 +111,16 @@ export const saveKundali = async (userID, birthDetails) => {
 
   else {
     return addKundaliForAUser(userID, birthDetails)
+  }
+}
+
+// UPDATE KUNDALI SETTINGS OF A USER
+
+export const updateKundaliSettingsOfAUser = async (userID, newKundaliSettings) => {
+  const userRef = firestore.doc(`/users/${userID}`);
+  const userSnapshot = await userRef.get();
+
+  if (userSnapshot.exists) {
+    return await userRef.update({kundaliSettings: newKundaliSettings});
   }
 }

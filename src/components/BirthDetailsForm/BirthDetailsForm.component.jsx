@@ -46,6 +46,7 @@ class BirthDetailsForm extends React.Component {
   }
 
   handlePlaceChange = (location) => {
+    this.setState({place: location})
     this.setState({place: location});
     if (location.length > 3) {
       this.setState((prevState) => ({searchedPlaces: [...prevState.searchedPlaces, location]}), () => this.getLocation(location))
@@ -77,7 +78,7 @@ class BirthDetailsForm extends React.Component {
 
   handleSelectLocation = (selectedLocation) => {
     const searchedLocation = this.state.searchedResults.find(location => location.geohash === selectedLocation);
-    
+
     const {lat, lng, formatted:place, timezone} = searchedLocation;
     this.setState({lat, lng, place, timezone})
     this.onSearchBlur();
@@ -111,12 +112,8 @@ class BirthDetailsForm extends React.Component {
           </Col>
         </Row>
 
-        {/* <Form.Item className = "birth-details__form-item">
-          <Input.Search required size = "large" prefix = {<Icon type = "compass" />} onChange = {this.handleChange} value = {this.state.place} onKeyUp = {this.handlePlaceChange} name = "place" placeholder = "Place" />
-        </Form.Item> */}
-
         <AutoComplete dataSource = {options} value = {this.state.place} onChange = {this.handlePlaceChange} onSelect = {this.handleSelectLocation} placeholder = "Place">
-
+          
         </AutoComplete>
 
         <Row type = "flex" justify = "space-between" align = "middle">

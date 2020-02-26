@@ -13,6 +13,7 @@ const KundaliInfo = (props) => {
         <Col xl = {16} xxl = {12} lg = {24} >
           <GrahaInfo />
         </Col>
+
       </Row>
     </div>
   );

@@ -24,6 +24,8 @@ import {getAllKundalisOfAUser} from './firebase/firestore/firestore.js';
 import {selectUserKundalis} from './redux/userKundalis/userKundalis.selectors';
 import {setAllUserKundalis} from './redux/userKundalis/userKundalis.actions.js';
 
+import {setKundaliSettingsAndUpdateCharts} from './redux/kundaliSettings/kundaliSettings.actions';
+
 class App extends React.Component {
   
   state = {
@@ -46,6 +48,7 @@ class App extends React.Component {
           if (snapshot.id) {
             const allKundalis = await getAllKundalisOfAUser(snapshot.id);
             this.props.setUserKundalis(allKundalis);
+            this.props.setKundaliSettingsAndUpdateCharts(snapshot.data().kundaliSettings)
           }
 
         })
@@ -82,7 +85,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setUser: (userAuth) => dispatch(setCurrentUser(userAuth)),
-  setUserKundalis: (allKundalis) => dispatch(setAllUserKundalis(allKundalis))
+  setUserKundalis: (allKundalis) => dispatch(setAllUserKundalis(allKundalis)),
+  setKundaliSettingsAndUpdateCharts: (kundaliSettings) => dispatch(setKundaliSettingsAndUpdateCharts(kundaliSettings))
 
 })
 

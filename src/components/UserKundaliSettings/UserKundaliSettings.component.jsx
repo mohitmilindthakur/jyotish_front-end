@@ -3,12 +3,18 @@ import './UserKundaliSettings.styles.scss';
 
 import {connect} from 'react-redux';
 
-import {setKundaliSettings} from './../../redux/kundaliSettings/kundaliSettings.actions.js';
-import {selectKundaliSettings, selectAllAyanamshas, selectAyanamshaFromNumber} from './../../redux/kundaliSettings/kundaliSettings.selectors.js';
+import {setKundaliSettingsAndUpdateCharts} from './../../redux/kundaliSettings/kundaliSettings.actions.js';
+import {selectKundaliSettings, selectAllAyanamshas} from './../../redux/kundaliSettings/kundaliSettings.selectors.js';
+
+import {ayanamshaToNumberMap} from './../../redux/kundaliSettings/ayanamshaToNumberMap.js';
+
+import {updateKundaliSettingsOfAUser} from './../../firebase/firestore/firestore.js';
+
+import {selectUserAuth} from './../../redux/currentUser/currentUser.selectors.js';
 
 import {Select, Form, Button, Row, Col, Radio} from 'antd';
 
-const UserKundaliSettings = ({allAyanamshas, kundaliSettings: {ayanamsha, zodiacType, houseType}, getAyanamshaFromNumber, setKundaliSettingsRedux, closeModal}) => {
+const UserKundaliSettings = ({allAyanamshas, kundaliSettings: {ayanamsha, zodiacType, houseType}, getAyanamshaFromNumber, setKundaliSettingsRedux, closeModal, userAuth}) => {
 
   const [kundaliSettingsState, setKundaliSettingsState] = useState({ayanamsha, zodiacType, houseType});
 
@@ -21,8 +27,17 @@ const UserKundaliSettings = ({allAyanamshas, kundaliSettings: {ayanamsha, zodiac
     setKundaliSettingsState({...kundaliSettingsState, zodiacType: value});
   }
 
-  const onFormSubmit = (event) => {
+  const onFormSubmit = async (event) => {
     event.preventDefault();
+
+    if (userAuth){
+      await updateKundaliSettingsOfAUser(userAuth.id, kundaliSettingsState)
+      .then(() => {
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
     setKundaliSettingsRedux(kundaliSettingsState);
     closeModal();
   }
@@ -41,9 +56,9 @@ const UserKundaliSettings = ({allAyanamshas, kundaliSettings: {ayanamsha, zodiac
         </Col>
 
         <Col span = {12}>
-          <Select defaultValue = {getAyanamshaFromNumber(ayanamsha)} onSelect = {onAyanamshaSelect} showSearch>
+          <Select defaultValue = {ayanamsha} onSelect = {onAyanamshaSelect} showSearch>
             {
-              allAyanamshas.map((ayanamsha, index) => <Select.Option key = {index} value = {ayanamsha}> {ayanamsha} </Select.Option>)
+              allAyanamshas.map((ayanamsha, index) => <Select.Option key = {ayanamsha} value = {ayanamshaToNumberMap[ayanamsha]}> {ayanamsha} </Select.Option>)
             }
           </Select>
         </Col>
@@ -82,11 +97,11 @@ const UserKundaliSettings = ({allAyanamshas, kundaliSettings: {ayanamsha, zodiac
 const mapStateToProps = (state) => ({
   kundaliSettings: selectKundaliSettings(state),
   allAyanamshas: selectAllAyanamshas(),
-  getAyanamshaFromNumber: (ayanamshaNumber) => selectAyanamshaFromNumber(ayanamshaNumber)
+  userAuth: selectUserAuth(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setKundaliSettingsRedux: (kundaliSettings) => dispatch(setKundaliSettings(kundaliSettings))
+  setKundaliSettingsRedux: (kundaliSettings) => dispatch(setKundaliSettingsAndUpdateCharts(kundaliSettings))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserKundaliSettings);

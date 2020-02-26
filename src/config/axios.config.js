@@ -7,7 +7,7 @@ let networkhost = 'http://192.168.1.3:5000/'
 let productionhost = "https://www.ahirbudhnya.com/"
 
 const instance = axios.create({
-    baseURL: productionhost
+    baseURL: localhost
 })
 
 export default instance;

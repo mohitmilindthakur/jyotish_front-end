@@ -20,7 +20,7 @@ const kundaliSettingsReducer = (state = INITIAL_STATE, action) => {
             return {...state, houseType: action.payload};
 
         case kundaliSettingsTypes.SET_KUNDALI_SETTINGS:
-            return {...state, ...action.payload, ayanamsha: ayanamshaToNumberMap[action.payload.ayanamsha]}
+            return {...state, ...action.payload}
 
         default:
             return state;

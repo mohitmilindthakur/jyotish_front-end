@@ -43,11 +43,11 @@ export const ayanamshaToNumberMap = {
     VALENS_MOON: 42
 }
 
-export const NumberToAyanamshaMap = {};
+export const numberToAyanamshaMap = {};
 
 for (let k in ayanamshaToNumberMap) {
     let key = ayanamshaToNumberMap[k]
-    NumberToAyanamshaMap[key] = k
+    numberToAyanamshaMap[key] = k
 }
 
 export default ayanamshaToNumberMap
