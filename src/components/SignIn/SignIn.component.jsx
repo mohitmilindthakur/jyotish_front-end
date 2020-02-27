@@ -53,7 +53,7 @@ const SignIn = (props) => {
       {
         isLoading ? 
         
-          <Spin className = "text-center"></Spin>
+          <div className = "text-center margin-u-3"><Spin></Spin></div>
 
           :
 
