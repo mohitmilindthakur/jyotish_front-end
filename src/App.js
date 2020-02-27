@@ -9,9 +9,7 @@ import {auth} from './firebase/firebase.config';
 import {addUserToFirestore} from './firebase/firestore/firestore';
 import {getAllKundalisOfAUser} from './firebase/firestore/firestore.js';
 
-
-import {setCurrentUser} from './redux/currentUser/currentUser.actions';
-import {setAllUserKundalis} from './redux/userKundalis/userKundalis.actions.js';
+import {setCurrentUser, setAllUserKundalis} from './redux/currentUser/currentUser.actions';
 import {setKundaliSettingsAndUpdateCharts} from './redux/kundaliSettings/kundaliSettings.actions';
 
 import {Spin} from 'antd';
