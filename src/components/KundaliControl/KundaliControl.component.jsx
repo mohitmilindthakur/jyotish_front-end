@@ -6,6 +6,7 @@ import { Row, Col } from 'antd';
 
 import {connect} from 'react-redux';
 import {selectUserAuth} from './../../redux/currentUser/currentUser.selectors.js';
+import {selectAllUserKundalis} from './../../redux/currentUser/currentUser.selectors.js';
 
 import OpenKundaliBtn from './../OpenKundaliBtn/OpenKundaliBtn.component';
 import NewKundaliBtn from './../NewKundaliBtn/NewKundaliBtn.component';
@@ -21,12 +22,12 @@ class KundaliControl extends React.Component {
   }
 
   render () {
-    const {userAuth} = this.props;
+    const {userAuth, allKundalis} = this.props;
     return (
       <React.Fragment>
         <Row type = "flex" justify = "space-around">
 
-          {userAuth && userAuth.kundalis && !!userAuth.kundalis.length && (<Col>
+          {userAuth && allKundalis && !!allKundalis.length && (<Col>
             <OpenKundaliBtn />
           </Col>)}
 
@@ -58,6 +59,7 @@ class KundaliControl extends React.Component {
 
 const mapStateToProps = (state) => ({
   userAuth: selectUserAuth(state),
+  allKundalis: selectAllUserKundalis(state),
 })
 
 export default connect(mapStateToProps)(KundaliControl);

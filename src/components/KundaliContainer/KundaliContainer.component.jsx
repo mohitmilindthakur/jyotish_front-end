@@ -3,7 +3,7 @@ import './KundaliContainer.styles.scss';
 
 import {connect} from 'react-redux';
 
-import {selectKundaliCharts, selectBhavas} from './../../redux/kundali/kundali.selectors.js';
+import {selectCurrentKundaliCharts, selectBhavas} from './../../redux/kundali/kundali.selectors.js';
 import {selectVisibleCharts} from './../../redux/visibleCharts/visibleCharts.selectors.js';
 
 import GridContainer from './../GridContainer/GridContainer.component';
@@ -28,7 +28,7 @@ const KundaliContainer = ({charts, divisionalChart, visibleCharts, bhavas}) => {
 }
 
 const mapStateToProps = (state) => ({
-  charts: selectKundaliCharts(state),
+  charts: selectCurrentKundaliCharts(state),
   bhavas: (DChartNumber) => selectBhavas(DChartNumber)(state),
   visibleCharts: selectVisibleCharts(state)
 })

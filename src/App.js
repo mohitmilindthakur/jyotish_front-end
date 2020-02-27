@@ -4,25 +4,19 @@ import './App.scss';
 import 'antd/dist/antd.css';
 
 import {connect} from 'react-redux';
-
-import {setCurrentUser} from './redux/currentUser/currentUser.actions';
-
-
-import Header from './components/Header/Header.component';
-import MainContent from './components/MainContent/MainContent.component';
-
 import {auth} from './firebase/firebase.config';
 
 import {addUserToFirestore} from './firebase/firestore/firestore';
+import {getAllKundalisOfAUser} from './firebase/firestore/firestore.js';
+
+
+import {setCurrentUser} from './redux/currentUser/currentUser.actions';
+import {setAllUserKundalis} from './redux/userKundalis/userKundalis.actions.js';
+import {setKundaliSettingsAndUpdateCharts} from './redux/kundaliSettings/kundaliSettings.actions';
 
 import {Spin} from 'antd';
-
-
-import {getAllKundalisOfAUser} from './firebase/firestore/firestore.js';
-import {selectUserKundalis} from './redux/userKundalis/userKundalis.selectors';
-import {setAllUserKundalis} from './redux/userKundalis/userKundalis.actions.js';
-
-import {setKundaliSettingsAndUpdateCharts} from './redux/kundaliSettings/kundaliSettings.actions';
+import Header from './components/Header/Header.component';
+import MainContent from './components/MainContent/MainContent.component';
 
 class App extends React.Component {
   
@@ -34,30 +28,56 @@ class App extends React.Component {
 
   componentDidMount () {
 
-    const {setUser} = this.props;
+    const {setCurrentUser, setAllUserKundalis, setKundaliSettingsAndUpdateCharts} = this.props;
 
-    auth.onAuthStateChanged( async (userAuth) => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged( async (userAuth) => {
+
+      let userRef, userSnapshot
+
       if (userAuth){
-        const userRef = await addUserToFirestore(userAuth);
-        userRef.onSnapshot( async (snapshot) => {
-          setUser({...snapshot.data(), id: snapshot.id})
-          this.setState({isLoading: false})
+        try {
+          userRef = await addUserToFirestore(userAuth);
+          userSnapshot = await userRef.get();
+          
+        } catch (error) {
+          alert(error.message)
+        }
 
-          if (snapshot.id) {
-            const allKundalis = await getAllKundalisOfAUser(snapshot.id);
-            this.props.setUserKundalis(allKundalis);
-            const userData = snapshot.data();
-            userData && this.props.setKundaliSettingsAndUpdateCharts(snapshot.data().kundaliSettings)
+        if (userSnapshot.exists) {
+
+          const userData = userSnapshot.data();
+
+          if (userData) {
+
+            const {kundaliSettings, kundalis, ...userAuthData} = userData;
+            setCurrentUser({...userAuthData, id: userSnapshot.id});
+
+            let allUserKundalis = [];
+
+            if (kundalis.length > 0) {
+              try {
+                allUserKundalis = await getAllKundalisOfAUser(userSnapshot.id)
+              } catch (error) {
+                alert('Could Not Get Your Saved Kundalis, Try Again!\n' + error.message)
+              }
+            }
+            setAllUserKundalis(allUserKundalis);
+
           }
-
-        })
+          setKundaliSettingsAndUpdateCharts(userSnapshot.data().kundaliSettings);
+          this.setState({isLoading: false});
+        }
       }
       else {
         this.setState({isLoading: false})
-        setUser(userAuth)
-        this.props.setUserKundalis([]);
+        setCurrentUser(userAuth)
+        setAllUserKundalis([]);
       }
     })
+  }
+
+  componentWillUnmount () {
+    this.unsubscribeFromAuth && this.unsubscribeFromAuth();
   }
 
   render () {
@@ -77,16 +97,11 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  allKundalis: selectUserKundalis(state)
-
-})
-
 const mapDispatchToProps = (dispatch) => ({
-  setUser: (userAuth) => dispatch(setCurrentUser(userAuth)),
-  setUserKundalis: (allKundalis) => dispatch(setAllUserKundalis(allKundalis)),
+  setCurrentUser: (userAuth) => dispatch(setCurrentUser(userAuth)),
+  setAllUserKundalis: (allKundalis) => dispatch(setAllUserKundalis(allKundalis)),
   setKundaliSettingsAndUpdateCharts: (kundaliSettings) => dispatch(setKundaliSettingsAndUpdateCharts(kundaliSettings))
 
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

@@ -3,7 +3,7 @@ import './BirthDetailsInfoOnToolbar.styles.scss';
 
 import {connect} from 'react-redux';
 
-import {selectBirthDetails} from './../../redux/birthDetails/birthDetails.selectors.js'; 
+import {selectCurrentBirthDetails} from './../../redux/birthDetails/birthDetails.selectors.js'; 
 const BirthDetailsInfoOnToolbar = ({birthDetails: {name, place, dateString, timeString}}) => {
 
   return (
@@ -14,7 +14,7 @@ const BirthDetailsInfoOnToolbar = ({birthDetails: {name, place, dateString, time
 }
 
 const mapStateToProps = state => ({
-  birthDetails: selectBirthDetails(state),
+  birthDetails: selectCurrentBirthDetails(state),
 })
 
 export default connect(mapStateToProps)(BirthDetailsInfoOnToolbar);

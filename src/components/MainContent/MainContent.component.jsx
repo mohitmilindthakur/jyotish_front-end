@@ -9,15 +9,15 @@ import KundaliContainer from './../KundaliContainer/KundaliContainer.component';
 import KundaliInfo from './../KundaliInfo/KundaliInfo.component';
 
 import {selectKundaliSettings} from './../../redux/kundaliSettings/kundaliSettings.selectors.js';
-import {selectBirthDetails} from './../../redux/birthDetails/birthDetails.selectors.js';
+import {selectCurrentBirthDetails} from './../../redux/birthDetails/birthDetails.selectors.js';
 import {fetchKundaliFromServerAsync} from './../../redux/kundali/kundali.actions';
 
 
 class MainContent extends React.Component {
 
   componentDidMount() {
-    const {setKundali, birthDetails, kundaliSettings} = this.props;
-    setKundali(birthDetails, kundaliSettings);
+    const {setKundali, currentBirthDetails, kundaliSettings} = this.props;
+    setKundali(currentBirthDetails, kundaliSettings);
   }
 
   render () {
@@ -43,12 +43,12 @@ class MainContent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  birthDetails: selectBirthDetails(state),
+  currentBirthDetails: selectCurrentBirthDetails(state),
   kundaliSettings: selectKundaliSettings(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setKundali: (birthDetails, kundaliSettings) => dispatch(fetchKundaliFromServerAsync(birthDetails, kundaliSettings))
+  setKundali: (currentBirthDetails, kundaliSettings) => dispatch(fetchKundaliFromServerAsync(currentBirthDetails, kundaliSettings))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContent);

@@ -5,16 +5,16 @@ import { Menu, Row, Col, Button } from 'antd';
 
 import {connect} from 'react-redux';
 
-import {selectUserKundalis} from './../../redux/userKundalis/userKundalis.selectors.js';
+import {selectAllUserKundalis} from './../../redux/currentUser/currentUser.selectors.js';
 
-import {setNewBirthDetailsAndSetKundali} from './../../redux/birthDetails/birthDetails.actions.js';
+import {editCurrentBirthDetailsAndSetKundali} from './../../redux/birthDetails/birthDetails.actions.js';
 
-const OpenKundaliModal = ({allKundalis, setBirthDetails, closeModal}) => {
+const OpenKundaliModal = ({allKundalis, setCurrentBirthDetails, closeModal}) => {
 
   let [selectedKundali, setSelectedKundali] = React.useState(null);
 
   const onSelectingBirthDetails = () => {
-    setBirthDetails(selectedKundali);
+    setCurrentBirthDetails(selectedKundali);
     closeModal();
   }
 
@@ -52,11 +52,11 @@ const OpenKundaliModal = ({allKundalis, setBirthDetails, closeModal}) => {
 }
 
 const mapStateToProps = (state) => ({
-  allKundalis: selectUserKundalis(state)
+  allKundalis: selectAllUserKundalis(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setBirthDetails: (birthDetails) => dispatch(setNewBirthDetailsAndSetKundali(birthDetails))
+  setCurrentBirthDetails: (birthDetails) => dispatch(editCurrentBirthDetailsAndSetKundali(birthDetails))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OpenKundaliModal);

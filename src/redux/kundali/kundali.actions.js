@@ -1,13 +1,6 @@
 import kundaliTypes from './kundali.types';
 import {getKundali} from './../../utils/axios.routes';
 
-
-
-export const setNewKundali = (kundali) => ({
-    type: kundaliTypes.SET_NEW_KUNDALI,
-    payload: kundali
-})
-
 export const fetchKundaliStart = () => ({
     type: kundaliTypes.FETCH_KUNDALI_FROM_SERVER_START
 });

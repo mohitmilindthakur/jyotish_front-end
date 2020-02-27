@@ -3,8 +3,8 @@ import './BirthDetailsForm.styles.scss';
 
 import {connect} from 'react-redux';
 
-import {selectBirthDetails} from './../../redux/birthDetails/birthDetails.selectors.js';
-import {setNewBirthDetailsAndSetKundali} from './../../redux/birthDetails/birthDetails.actions.js';
+import {selectCurrentBirthDetails} from './../../redux/birthDetails/birthDetails.selectors.js';
+import {editCurrentBirthDetailsAndSetKundali} from './../../redux/birthDetails/birthDetails.actions.js';
 import {selectKundaliSettings} from './../../redux/kundaliSettings/kundaliSettings.selectors.js';
 
 import {getLocationAxios} from './../../utils/axios.routes.js';
@@ -38,7 +38,7 @@ class BirthDetailsForm extends React.Component {
   onFormSubmit = (event) => {
     event.preventDefault();
     let { searchedPlaces, searchedResultsPromise, searchedResults, ...birthDetails } = this.state;
-    this.props.setBirthDetails(birthDetails);
+    this.props.editCurrentBirthDetails(birthDetails);
 
     if (this.props.onFormSubmit) {
       this.props.onFormSubmit();
@@ -166,12 +166,12 @@ class BirthDetailsForm extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  birthDetails: selectBirthDetails(state),
+  birthDetails: selectCurrentBirthDetails(state),
   kundaliSettings: selectKundaliSettings(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setBirthDetails: (birthDetails) => dispatch(setNewBirthDetailsAndSetKundali(birthDetails))
+  editCurrentBirthDetails: (birthDetails) => dispatch(editCurrentBirthDetailsAndSetKundali(birthDetails))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BirthDetailsForm);

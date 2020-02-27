@@ -2,31 +2,31 @@ import {createSelector} from 'reselect';
 
 import {orderGrahas} from './kundali.utils';
 
-export const selectKundaliObject = (state) => state.kundali;
+export const selectCurrentKundaliObject = (state) => state.currentKundali;
 
-export const selectKundali = createSelector(
-    [selectKundaliObject],
+export const selectCurrentKundali = createSelector(
+    [selectCurrentKundaliObject],
     (kundali) => kundali.kundali
 )
 
-export const selectKundaliFetchStatus = createSelector(
-    [selectKundaliObject],
+export const selectCurrentKundaliFetchStatus = createSelector(
+    [selectCurrentKundaliObject],
     (kundali) => kundali.isFetching
 )
 
-export const selectKundaliFetchErrorStatus = createSelector(
-    [selectKundaliObject],
+export const selectCurrentKundaliFetchErrorStatus = createSelector(
+    [selectCurrentKundaliObject],
     (kundali) => kundali.errorMessage
 )
 
-export const selectKundaliCharts = createSelector(
-    [selectKundali],
+export const selectCurrentKundaliCharts = createSelector(
+    [selectCurrentKundali],
     (kundali) => kundali && kundali.charts
 );
 
 export const selectDivisionalChart = (divisionalChart) => {
     return createSelector(
-        [selectKundaliCharts],
+        [selectCurrentKundaliCharts],
         (charts) => charts && charts[`d${divisionalChart}`]
     )
 };

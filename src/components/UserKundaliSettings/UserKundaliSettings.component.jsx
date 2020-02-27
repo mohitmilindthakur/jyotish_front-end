@@ -12,11 +12,12 @@ import {updateKundaliSettingsOfAUser} from './../../firebase/firestore/firestore
 
 import {selectUserAuth} from './../../redux/currentUser/currentUser.selectors.js';
 
-import {Select, Form, Button, Row, Col, Radio} from 'antd';
+import {Select, Form, Button, Row, Col, Radio, Spin} from 'antd';
 
 const UserKundaliSettings = ({allAyanamshas, kundaliSettings: {ayanamsha, zodiacType, houseType}, getAyanamshaFromNumber, setKundaliSettingsRedux, closeModal, userAuth}) => {
 
   const [kundaliSettingsState, setKundaliSettingsState] = useState({ayanamsha, zodiacType, houseType});
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const onAyanamshaSelect = (value) => {
     setKundaliSettingsState({...kundaliSettingsState, ayanamsha: value});
@@ -31,6 +32,7 @@ const UserKundaliSettings = ({allAyanamshas, kundaliSettings: {ayanamsha, zodiac
     event.preventDefault();
 
     if (userAuth){
+      setIsLoading(true);
       await updateKundaliSettingsOfAUser(userAuth.id, kundaliSettingsState)
       .then(() => {
       })
@@ -39,6 +41,7 @@ const UserKundaliSettings = ({allAyanamshas, kundaliSettings: {ayanamsha, zodiac
       })
     }
     setKundaliSettingsRedux(kundaliSettingsState);
+    setIsLoading(false);
     closeModal();
   }
 
@@ -85,7 +88,7 @@ const UserKundaliSettings = ({allAyanamshas, kundaliSettings: {ayanamsha, zodiac
 
       <Row className = "margin-u-5">
         <Col align = "middle" justify = "center">
-          <Button type = "outlined" htmlType = "submit" size = "default"> Modify Changes </Button>
+          {isLoading ? <Spin></Spin> : <Button type = "outlined" htmlType = "submit" size = "default"> Modify Changes </Button>}
         </Col>
       </Row>
 
